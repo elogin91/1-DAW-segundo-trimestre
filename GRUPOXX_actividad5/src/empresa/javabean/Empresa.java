@@ -48,13 +48,13 @@ public class Empresa implements IntGestionEmpresa {
 
 	//Buscamos todos los empleados en plantilla con el mismo genero
 	public ArrayList<Empleado> buscarPorSexo(char sexo) {
-		ArrayList<Empleado> empleadosMismoGenero = new ArrayList();
+		ArrayList<Empleado> empleadosPorGenero = new ArrayList();
 		for (int i = 0; i <= (plantilla.size() - 1); i++) {
 			if (Character.toLowerCase(plantilla.get(i).getGenero()) == Character.toLowerCase(sexo)) {
-				empleadosMismoGenero.add(plantilla.get(i));
+				empleadosPorGenero.add(plantilla.get(i));
 			}
 		}
-		return empleadosMismoGenero;
+		return empleadosPorGenero;
 	}
 
 	//Buscamos un empleado por IdEmpleado
@@ -81,20 +81,35 @@ public class Empresa implements IntGestionEmpresa {
 
 	@Override
 	public ArrayList<Empleado> buscarPorDepartamento(int idDepar) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Empleado> empleadosPorDepartamento = new ArrayList();
+		for (int i = 0; i <= (plantilla.size() - 1); i++) {
+			if (plantilla.get(i).getDepartamento().getIdDepar() == (idDepar)) {
+				empleadosPorDepartamento.add(plantilla.get(i));
+			}
+		}
+		return empleadosPorDepartamento;
 	}
 
 	@Override
 	public ArrayList<Empleado> buscarPorTrabajo(String idTrabajo) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Empleado> empleadosPorTrabajo = new ArrayList();
+		for (int i = 0; i <= (plantilla.size() - 1); i++) {
+			if (plantilla.get(i).getTrabajo().getIdTrabajo().equals(idTrabajo)) {
+				empleadosPorTrabajo.add(plantilla.get(i));
+			}
+		}
+		return empleadosPorTrabajo;
 	}
 
 	@Override
 	public ArrayList<Empleado> buscarPorPais(String pais) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Empleado> empleadosPorPais = new ArrayList();
+		for (int i = 0; i <= (plantilla.size() - 1); i++) {
+			if (plantilla.get(i).getDepartamento().getLocalidad().getPais().equals(pais)) {
+				empleadosPorPais.add(plantilla.get(i));
+			}
+		}
+		return empleadosPorPais;
 	}
 
 }
