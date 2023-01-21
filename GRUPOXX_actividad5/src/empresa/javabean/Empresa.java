@@ -2,7 +2,10 @@ package empresa.javabean;
 
 import java.util.ArrayList;
 
+import empleado.javabean.Departamento;
 import empleado.javabean.Empleado;
+import empleado.javabean.Localidad;
+import empleado.javabean.Trabajo;
 
 public class Empresa implements IntGestionEmpresa {
 	private String nombre;
@@ -46,7 +49,7 @@ public class Empresa implements IntGestionEmpresa {
 		}
 	}
 
-	//Buscamos todos los empleados en plantilla con el mismo genero
+	// Buscamos todos los empleados en plantilla con el mismo genero
 	public ArrayList<Empleado> buscarPorSexo(char sexo) {
 		ArrayList<Empleado> empleadosPorGenero = new ArrayList();
 		for (int i = 0; i <= (plantilla.size() - 1); i++) {
@@ -57,10 +60,10 @@ public class Empresa implements IntGestionEmpresa {
 		return empleadosPorGenero;
 	}
 
-	//Buscamos un empleado por IdEmpleado
+	// Buscamos un empleado por IdEmpleado
 	public Empleado buscarUno(int idEmpleado) {
 
-		for (int i = 0; i < (plantilla.size() - 1); i++) {
+		for (int i = 0; i < (plantilla.size()); i++) {
 			if (plantilla.get(i).getIdEmpleado() == idEmpleado) {
 				return plantilla.get(i);
 			}
@@ -75,8 +78,12 @@ public class Empresa implements IntGestionEmpresa {
 
 	@Override
 	public Double masaSalarial() {
-		// TODO Auto-generated method stub
-		return null;
+		Double masaSalarial = 0.00;
+		for (int i = 0; i <= (plantilla.size() - 1); i++) {
+			masaSalarial = masaSalarial + plantilla.get(i).salarioBruto();
+		}
+
+		return masaSalarial;
 	}
 
 	@Override
@@ -110,6 +117,11 @@ public class Empresa implements IntGestionEmpresa {
 			}
 		}
 		return empleadosPorPais;
+	}
+
+	@Override
+	public String toString() {
+		return "Empresa [nombre=" + nombre + ", plantilla=" + plantilla + "]";
 	}
 
 }

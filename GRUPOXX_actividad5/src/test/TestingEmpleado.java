@@ -1,4 +1,4 @@
-package empleado.test;
+package test;
 
 import empleado.javabean.Departamento;
 import empleado.javabean.Empleado;
@@ -12,13 +12,13 @@ public class TestingEmpleado {
 
 		//Crea un objeto Localización, departamento con esa Localización, un Trabajo, y un Empleado con su departamento y su Trabajo.
 		
-		Localidad localizacion = new Localidad(1, "Calle Real", "Madrid", "España");
+		Localidad localizacionMadrid = new Localidad(1, "Calle Real", "Madrid", "España");
 		
-		Departamento departamento = new Departamento(1, "Administración", localizacion);
+		Departamento departamentoAdmin = new Departamento(1, "Administración", localizacionMadrid);
 		
-		Trabajo trabajo = new Trabajo ("1", "Jefe de equipo", 5000.99, 9999.99);
+		Trabajo trabajoJefe = new Trabajo ("1", "Jefe de equipo", 5000.99, 9999.99);
 		
-		Empleado empleado = new Empleado (1, "Pepe", "Lopez Lopez", "pepe.lplp@gmail.com", 6000.99, 1500.99,'h', trabajo,departamento);
+		Empleado empleado = new Empleado (1, "Pepe", "Lopez Lopez", "pepe.lplp@gmail.com", 6000.99, 1500.99,'h', trabajoJefe,departamentoAdmin);
 		
 		//SIN usar toString: Nombre, apellidos, género, nombre del departamento, nombre de su trabajo, dirección , ciudad y país.
 		System.out.println(empleado.getNombre());
@@ -39,8 +39,4 @@ public class TestingEmpleado {
 		System.out.println(deptartamentoEmpleado);
 	}
 	
-	//Creamos Empleados para probar, de distintos trabajos, departamentos con sus localidades.
-	private void cargarDatos() {
-		
-	}
 }

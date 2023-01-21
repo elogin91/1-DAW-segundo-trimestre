@@ -1,5 +1,7 @@
 package empleado.javabean;
 
+import java.util.Objects;
+
 public class Empleado {
 	private int idEmpleado;
 	private String nombre, apellidos, email;
@@ -7,16 +9,11 @@ public class Empleado {
 	private char genero;
 	private Trabajo trabajo;
 	private Departamento departamento;
-	
+
 	// Default constructor
 	public Empleado() {
 	}
-	
-	// Getters & Setters
-	public int getIdEmpleado() {
-		return idEmpleado;
-	}
-	
+
 	// Constructor with parameter
 	public Empleado(int idEmpleado, String nombre, String apellidos, String email, Double salario, Double comision,
 			char genero, Trabajo trabajo, Departamento departamento) {
@@ -30,6 +27,11 @@ public class Empleado {
 		this.genero = genero;
 		this.trabajo = trabajo;
 		this.departamento = departamento;
+	}
+
+	// Getters & Setters
+	public int getIdEmpleado() {
+		return idEmpleado;
 	}
 
 	public void setIdEmpleado(int idEmpleado) {
@@ -84,47 +86,6 @@ public class Empleado {
 		this.genero = genero;
 	}
 
-	@Override
-	public String toString() {
-		return "Empleado [idEmpleado=" + idEmpleado + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", salario=" + salario + ", comision=" + comision + ", genero=" + genero + ", trabajo="
-				+ trabajo + ", departamento=" + departamento + "]";
-	}
-
-	public double salarioBruto() {
-		return comision+salario;
-	}
-	public double salarioMensual(int meses) {
-		return salarioBruto()/meses;
-	}
-	
-	public String literalSexo() {
-		if(genero == 'h' || genero == 'H') {
-			return "Hombre";
-		}
-		else if (genero == 'm' || genero == 'M') {
-			return "Mujer";
-		}
-		else {
-			return "Caracter no válido.";
-		}
-		
-	}
-	
-	public String obtenerEmail() {
-
-		String primerApellido[] =apellidos.split(" ");
-		char primeraLetraNombre = nombre.charAt(0);
-
-		return (primeraLetraNombre + primerApellido[0]).toLowerCase();
-		
-	}
-	
-	public String nombreCompleto() {
-		return nombre + " " + apellidos;
-		
-	}
-
 	public Trabajo getTrabajo() {
 		return trabajo;
 	}
@@ -140,5 +101,63 @@ public class Empleado {
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
+
+	@Override
+	public String toString() {
+		return "Empleado [idEmpleado=" + idEmpleado + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
+				+ email + ", salario=" + salario + ", comision=" + comision + ", genero=" + genero + ", trabajo="
+				+ trabajo + ", departamento=" + departamento + "]";
+	}
+
+	public double salarioBruto() {
+		return comision + salario;
+	}
+
+	public double salarioMensual(int meses) {
+		return salarioBruto() / meses;
+	}
+
+	public String literalSexo() {
+		if (genero == 'h' || genero == 'H') {
+			return "Hombre";
+		} else if (genero == 'm' || genero == 'M') {
+			return "Mujer";
+		} else {
+			return "Caracter no válido.";
+		}
+
+	}
+
+	public String obtenerEmail() {
+
+		String primerApellido[] = apellidos.split(" ");
+		char primeraLetraNombre = nombre.charAt(0);
+
+		return (primeraLetraNombre + primerApellido[0]).toLowerCase();
+
+	}
+
+	public String nombreCompleto() {
+		return nombre + " " + apellidos;
+
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(idEmpleado);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Empleado other = (Empleado) obj;
+		return idEmpleado == other.idEmpleado;
+	}
+	
 	
 }
