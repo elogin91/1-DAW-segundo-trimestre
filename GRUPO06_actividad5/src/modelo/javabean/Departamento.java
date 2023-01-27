@@ -1,4 +1,4 @@
-package empleado.javabean;
+package modelo.javabean;
 
 import java.util.Objects;
 
@@ -8,11 +8,11 @@ public class Departamento {
 	private String descripcion;
 	private Localidad localidad;
 
-	//Constructor por defecto
+	// Constructor por defecto.
 	public Departamento() {
 	}
-	
-	//Constructor con parametros
+
+	// Constructor con parámetros.
 	public Departamento(int idDepar, String descripcion, Localidad localidad) {
 		super();
 		this.idDepar = idDepar;
@@ -20,7 +20,7 @@ public class Departamento {
 		this.localidad = localidad;
 	}
 
-	// Getters & Setters
+	// Getters & Setters.
 	public int getIdDepar() {
 		return idDepar;
 	}
@@ -45,13 +45,14 @@ public class Departamento {
 		this.localidad = localidad;
 	}
 
-	//Redefinir toString en cada clase
+	// Redefinir toString en cada clase.
 	@Override
 	public String toString() {
 		return "Departamento [idDepar=" + idDepar + ", descripcion=" + descripcion + ", localidad=" + localidad + "]";
 	}
 
-	//Redefinir equals y hashcode: Dos departamentos son iguales si su idDepar es el mismo.
+	// Redefinir equals y hashcode: Dos departamentos son iguales si su idDepar es
+	// el mismo.
 	@Override
 	public int hashCode() {
 		return Objects.hash(idDepar);

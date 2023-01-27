@@ -1,8 +1,8 @@
-package empresa.javabean;
+package modelo.dao;
 
 import java.util.ArrayList;
 
-import empleado.javabean.Empleado;
+import modelo.javabean.Empleado;
 
 public interface IntGestionEmpresa {
 

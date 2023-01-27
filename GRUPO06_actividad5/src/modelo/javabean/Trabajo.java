@@ -1,4 +1,4 @@
-package empleado.javabean;
+package modelo.javabean;
 
 import java.util.Objects;
 
@@ -6,11 +6,11 @@ public class Trabajo {
 	private String idTrabajo, descripcion;
 	private Double minSalario, maxSalario;
 
-	//Constructor por defecto
+	// Constructor por defecto.
 	public Trabajo() {
 	}
-	
-	//Constructor con parametros
+
+	// Constructor con parámetros.
 	public Trabajo(String idTrabajo, String descripcion, Double minSalario, Double maxSalario) {
 		super();
 		this.idTrabajo = idTrabajo;
@@ -19,7 +19,7 @@ public class Trabajo {
 		this.maxSalario = maxSalario;
 	}
 
-	// Getters & Setters
+	// Getters & Setters.
 	public String getIdTrabajo() {
 		return idTrabajo;
 	}
@@ -51,15 +51,16 @@ public class Trabajo {
 	public void setMaxSalario(Double maxSalario) {
 		this.maxSalario = maxSalario;
 	}
-	
-	//Redefinir toString en cada clase
+
+	// Redefinir toString en cada clase.
 	@Override
 	public String toString() {
 		return "Trabajo [idTrabajo=" + idTrabajo + ", descripcion=" + descripcion + ", minSalario=" + minSalario
 				+ ", maxSalario=" + maxSalario + "]";
 	}
 
-	//Redefinir equals y hashcode: Dos trabajos son iguales si su idTrabajo es la misma
+	// Redefinir equals y hashcode: Dos trabajos son iguales si su idTrabajo es la
+	// misma.
 	@Override
 	public int hashCode() {
 		return Objects.hash(idTrabajo);
