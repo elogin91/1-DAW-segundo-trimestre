@@ -6,10 +6,11 @@ public class Localidad {
 	private int idLocalidad;
 	private String direccion, ciudad, pais;
 
+	//Constructor por defecto
 	public Localidad() {
-
 	}
 
+	//Constructor con parametros
 	public Localidad(int idLocalidad, String direccion, String ciudad, String pais) {
 		super();
 		this.idLocalidad = idLocalidad;
@@ -18,6 +19,7 @@ public class Localidad {
 		this.pais = pais;
 	}
 
+	// Getters & Setters
 	public int getIdLocalidad() {
 		return idLocalidad;
 	}
@@ -49,13 +51,15 @@ public class Localidad {
 	public void setPais(String pais) {
 		this.pais = pais;
 	}
-
+	
+	//Redefinir toString en cada clase
 	@Override
 	public String toString() {
 		return "Localidad [idLocalidad=" + idLocalidad + ", direccion=" + direccion + ", ciudad=" + ciudad + ", pais="
 				+ pais + "]";
 	}
 
+	//Redefinir equals y hashcode: Dos localidades son iguales si su idLocalidad es la misma
 	@Override
 	public int hashCode() {
 		return Objects.hash(idLocalidad);

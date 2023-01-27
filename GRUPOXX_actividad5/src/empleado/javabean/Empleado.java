@@ -10,11 +10,11 @@ public class Empleado {
 	private Trabajo trabajo;
 	private Departamento departamento;
 
-	// Default constructor
+	// Constructor por defecto
 	public Empleado() {
 	}
 
-	// Constructor with parameter
+	// Constructor con parametros
 	public Empleado(int idEmpleado, String nombre, String apellidos, String email, Double salario, Double comision,
 			char genero, Trabajo trabajo, Departamento departamento) {
 		super();
@@ -101,22 +101,18 @@ public class Empleado {
 	public void setDepartamento(Departamento departamento) {
 		this.departamento = departamento;
 	}
-
-	@Override
-	public String toString() {
-		return "Empleado [idEmpleado=" + idEmpleado + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
-				+ email + ", salario=" + salario + ", comision=" + comision + ", genero=" + genero + ", trabajo="
-				+ trabajo + ", departamento=" + departamento + "]";
-	}
-
+	
+	//Devuelve la suma del salario y la comision (complemento se ha refactorizado a comisión)
 	public double salarioBruto() {
 		return comision + salario;
 	}
-
+	
+	//Devuelve salario mensual
 	public double salarioMensual(int meses) {
 		return salarioBruto() / meses;
 	}
-
+	
+	//Devuelve el literal del Sexo(variable sexo refactorizada a género)
 	public String literalSexo() {
 		if (genero == 'h' || genero == 'H') {
 			return "Hombre";
@@ -127,7 +123,8 @@ public class Empleado {
 		}
 
 	}
-
+	
+	//Devuelve un String con la primera letra del nombre + primer apellido, en minúsculas
 	public String obtenerEmail() {
 
 		String primerApellido[] = apellidos.split(" ");
@@ -137,11 +134,21 @@ public class Empleado {
 
 	}
 
+	//Devuelve la concatenación del nombre + “ “ + apellidos
 	public String nombreCompleto() {
 		return nombre + " " + apellidos;
 
 	}
 
+	//Redefinir toString en cada clase
+	@Override
+	public String toString() {
+		return "Empleado [idEmpleado=" + idEmpleado + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email="
+				+ email + ", salario=" + salario + ", comision=" + comision + ", genero=" + genero + ", trabajo="
+				+ trabajo + ", departamento=" + departamento + "]";
+	}
+	
+	//Redefinir equals y hashcode: Dos empleados son iguales si su idEmpleado es el mismo.
 	@Override
 	public int hashCode() {
 		return Objects.hash(idEmpleado);
@@ -158,6 +165,4 @@ public class Empleado {
 		Empleado other = (Empleado) obj;
 		return idEmpleado == other.idEmpleado;
 	}
-	
-	
 }
