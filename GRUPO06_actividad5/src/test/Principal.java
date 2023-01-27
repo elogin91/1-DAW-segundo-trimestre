@@ -24,7 +24,7 @@ public class Principal {
 		System.out.println("------------------------------------");
 
 		// Prueba Método: Alta Empleados.
-		Localidad localizacionMadrid = new Localidad(2, "Calle Real", "Madrid", "España");
+		Localidad localizacionMadrid = new Localidad(2, "Calle Real", "Madrid", "españa");
 		Departamento departamentoLimpiezaMadrid = new Departamento(2, "Limpieza", localizacionMadrid);
 		Trabajo trabajoSupervisor = new Trabajo("2", "Supervisor", 2000.99, 4999.99);
 		Empleado empleado5 = new Empleado(5, "Ana", "Rico Ruiz", "super_limpi1@hotmail.es", 4000.99, 288.99, 'm',

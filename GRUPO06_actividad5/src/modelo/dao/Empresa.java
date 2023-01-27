@@ -114,7 +114,7 @@ public class Empresa implements IntGestionEmpresa {
 	public ArrayList<Empleado> buscarPorTrabajo(String idTrabajo) {
 		ArrayList<Empleado> empleadosPorTrabajo = new ArrayList();
 		for (Empleado empleado : plantilla) {
-			if (empleado.getTrabajo().getIdTrabajo().equals(idTrabajo)) {
+			if (empleado.getTrabajo().getIdTrabajo().equalsIgnoreCase(idTrabajo)) {
 				empleadosPorTrabajo.add(empleado);
 			}
 		}
@@ -126,7 +126,7 @@ public class Empresa implements IntGestionEmpresa {
 	public ArrayList<Empleado> buscarPorPais(String pais) {
 		ArrayList<Empleado> empleadosPorPais = new ArrayList();
 		for (Empleado empleado : plantilla) {
-			if (empleado.getDepartamento().getLocalidad().getPais().equals(pais)) {
+			if (empleado.getDepartamento().getLocalidad().getPais().equalsIgnoreCase(pais)) {
 				empleadosPorPais.add(empleado);
 			}
 		}
