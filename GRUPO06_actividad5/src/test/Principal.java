@@ -1,7 +1,5 @@
 package test;
 
-import java.util.ArrayList;
-
 import modelo.dao.Empresa;
 import modelo.javabean.Departamento;
 import modelo.javabean.Empleado;

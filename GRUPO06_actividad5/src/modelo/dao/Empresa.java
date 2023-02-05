@@ -16,7 +16,7 @@ public class Empresa implements IntGestionEmpresa {
 	public Empresa(String nombreEmpresa) {
 		super();
 		this.nombre = nombreEmpresa;
-		this.plantilla = new ArrayList();
+		this.plantilla = new ArrayList<>();
 		cargarDatos();
 	}
 
@@ -61,7 +61,7 @@ public class Empresa implements IntGestionEmpresa {
 	// Buscamos todos los empleados en plantilla con el mismo genero.
 	@Override
 	public ArrayList<Empleado> buscarPorSexo(char sexo) {
-		ArrayList<Empleado> empleadosPorGenero = new ArrayList();
+		ArrayList<Empleado> empleadosPorGenero = new ArrayList<>();
 		for (Empleado empleado : plantilla) {
 			if (Character.toLowerCase(empleado.getGenero()) == Character.toLowerCase(sexo)) {
 				empleadosPorGenero.add(empleado);
@@ -100,7 +100,7 @@ public class Empresa implements IntGestionEmpresa {
 	// Buscamos a los empleados de la empresa por departamento.
 	@Override
 	public ArrayList<Empleado> buscarPorDepartamento(int idDepar) {
-		ArrayList<Empleado> empleadosPorDepartamento = new ArrayList();
+		ArrayList<Empleado> empleadosPorDepartamento = new ArrayList<>();
 		for (Empleado empleado : plantilla) {
 			if (empleado.getDepartamento().getIdDepar() == (idDepar)) {
 				empleadosPorDepartamento.add(empleado);
@@ -112,7 +112,7 @@ public class Empresa implements IntGestionEmpresa {
 	// Buscamos a los empleados de la empresa por el trabajo que realizan.
 	@Override
 	public ArrayList<Empleado> buscarPorTrabajo(String idTrabajo) {
-		ArrayList<Empleado> empleadosPorTrabajo = new ArrayList();
+		ArrayList<Empleado> empleadosPorTrabajo = new ArrayList<>();
 		for (Empleado empleado : plantilla) {
 			if (empleado.getTrabajo().getIdTrabajo().equalsIgnoreCase(idTrabajo)) {
 				empleadosPorTrabajo.add(empleado);
@@ -124,7 +124,7 @@ public class Empresa implements IntGestionEmpresa {
 	// Buscamos a los empleados de la empresa por país.
 	@Override
 	public ArrayList<Empleado> buscarPorPais(String pais) {
-		ArrayList<Empleado> empleadosPorPais = new ArrayList();
+		ArrayList<Empleado> empleadosPorPais = new ArrayList<>();
 		for (Empleado empleado : plantilla) {
 			if (empleado.getDepartamento().getLocalidad().getPais().equalsIgnoreCase(pais)) {
 				empleadosPorPais.add(empleado);
