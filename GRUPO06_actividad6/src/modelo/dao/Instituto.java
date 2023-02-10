@@ -3,7 +3,10 @@ package modelo.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import modelo.javabean.Administrativo;
+import modelo.javabean.Alumno;
 import modelo.javabean.Persona;
+import modelo.javabean.Profesor;
 
 public class Instituto implements InstitutoDao{
 	
@@ -51,7 +54,33 @@ public class Instituto implements InstitutoDao{
 
 	@Override
 	public List<Persona> buscarPersonaPorTipo(String tipoPersona) {
+		List<Persona> resultadoBusqueda = new ArrayList <Persona>();
 		// TODO Auto-generated method stub
-		return null;
+		for (Persona persona : personas) {
+			if (tipoPersona.equalsIgnoreCase("profesor")) {
+				if(persona instanceof Profesor) {
+				resultadoBusqueda.add(persona);
+				}
+			}
+			else if (tipoPersona.equalsIgnoreCase("alumno")) {
+				if(persona instanceof Alumno) {
+				resultadoBusqueda.add(persona);
+				}
+			}
+			else if (tipoPersona.equalsIgnoreCase("administrativo")) {
+				if(persona instanceof Administrativo) {
+				resultadoBusqueda.add(persona);
+				}
+			}
+
+		}
+		return resultadoBusqueda;
 	}
+
+	@Override
+	public String toString() {
+		return "Instituto [personas=" + personas + "]";
+	}
+	
+	
 }
