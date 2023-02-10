@@ -27,7 +27,7 @@ public class Administrativo extends Persona{
 
 	@Override
 	public String trabajar() {
-		// TODO Auto-generated method stub
+		
 		return "El administrativo" + this.getNombre() + " va a realizar estas tareas: " + this.getTareas() + ".";
 	}
 

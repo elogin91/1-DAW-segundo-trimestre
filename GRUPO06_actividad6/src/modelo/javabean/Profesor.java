@@ -28,7 +28,7 @@ public class Profesor extends Persona{
 
 	@Override
 	public String trabajar() {
-		// TODO Auto-generated method stub
+		
 		return "El profesor " + this. getNombre() + " va a impartir su clase.";
 	}
 

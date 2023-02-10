@@ -1,8 +1,8 @@
 package modelo.test;
 
+
 import modelo.javabean.Administrativo;
 import modelo.javabean.Alumno;
-import modelo.javabean.Persona;
 import modelo.javabean.Profesor;
 
 public class Principal {

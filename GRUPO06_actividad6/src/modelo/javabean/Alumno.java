@@ -26,7 +26,7 @@ public class Alumno extends Persona{
 
 	@Override
 	public String trabajar() {
-		// TODO Auto-generated method stub
+		
 		return "El alumno " + this.getNombre()+ " va a estudiar para el curso " + this.getCurso() + ".";
 	}
 
