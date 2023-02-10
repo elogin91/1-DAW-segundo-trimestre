@@ -12,7 +12,7 @@ public class TestBuscarUno {
 		//Probando Buscar Persona
 		System.out.println("La persona que ha buscado por Nif es: ");
 		
-		System.out.println(instituto.buscarPersona("111111111A"));
+		System.out.println(instituto.buscarPersona("999999999z"));
 		
 		System.out.println("__________________________________________________");
 		System.out.println("__________________________________________________");
