@@ -1,5 +1,9 @@
 package javabeans;
 
-public class ProyectoConEmpleado {
+import java.sql.Date;
 
+public class ProyectoConEmpleado {
+	private int numeroOrden, idEmpleado, horasAsignadas;
+	private String idProyecto;
+	private Date fechaIncorporacion;
 }
