@@ -3,8 +3,6 @@ package daos;
 import java.util.List;
 
 import javabeans.Departamento;
-import javabeans.Empleado;
-import javabeans.Perfil;
 
 public interface DepartamentoDao {
 	

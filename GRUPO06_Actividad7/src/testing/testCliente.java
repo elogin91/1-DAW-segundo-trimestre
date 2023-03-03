@@ -21,6 +21,15 @@ public class testCliente {
 		comprobarAltaCliente(clienteDao);
 		
 		comprobarBuscarTodo(clienteDao);
+		
+		comprobarModificarCliente(clienteDao);
+	}
+
+	private static void comprobarModificarCliente(ClienteDao clienteDao) {
+		Cliente cliente = new Cliente("A33333333", "Ana Maria Modificado", "Perez", "Málaga", 13000.99, 13);
+		int fila = clienteDao.modificarCliente(cliente);
+		System.out.println(fila);
+		
 	}
 
 	private static void comprobarAltaCliente(ClienteDao clienteDao) {

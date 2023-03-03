@@ -108,8 +108,24 @@ public class ClienteDaoImplMy8 extends ConexionAbstract implements ClienteDao{
 
 	@Override
 	public int modificarCliente(Cliente cliente) {
-		// TODO Auto-generated method stub
-		return 0;
+		PreparedStatement statement = prepareStatement("Update clientes set nombre = ?, apellidos = ?, domicilio = ?, facturacion_anual = ?, numero_empleados= ? WHERE cif=?" );
+		try {
+			statement.setString(1, cliente.getNombre());
+			statement.setString(2, cliente.getApellidos());
+			statement.setString(3, cliente.getDomicilio());
+			statement.setDouble(4, cliente.getFacturacionAnual());
+			statement.setInt(5, cliente.getNumeroEmpleado());
+			statement.setString(6, cliente.getCif());
+			filas = statement.executeUpdate();
+			filas = 1;
+			
+			return filas;	
+			
+		} catch (SQLException e) {
+			System.out.println("Error al recolectar los datos");
+			e.printStackTrace();
+		}
+		return filas;
 	}
 
 }
