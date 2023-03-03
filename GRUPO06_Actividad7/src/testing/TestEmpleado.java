@@ -4,7 +4,7 @@ import daos.ClienteDao;
 import daos.ClienteDaoImplMy8;
 import javabeans.Cliente;
 
-public class testCliente {
+public class TestEmpleado {
 
 	public static void main(String[] args) {
 

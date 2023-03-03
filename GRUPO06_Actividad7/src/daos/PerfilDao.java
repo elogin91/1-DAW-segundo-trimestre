@@ -8,6 +8,6 @@ public interface PerfilDao {
 	int altaPerfil(Perfil perfil);
 	int eliminarPerfil(int idPerfil);
 	int modificarPerfil(Perfil perfil);
-	Perfil buscarUnEmpleado(int idPerfil);
+	Perfil buscarUnPerfil(int idPerfil);
 	List <Perfil> buscarTodosPerfiles();
 }

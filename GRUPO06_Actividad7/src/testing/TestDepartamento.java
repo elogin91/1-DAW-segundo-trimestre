@@ -1,13 +1,11 @@
 package testing;
 
-import daos.ClienteDao;
-import daos.ClienteDaoImplMy8;
 import daos.DepartamentoDao;
 import daos.DepartamentoDaoImplMy8;
-import javabeans.Cliente;
+
 import javabeans.Departamento;
 
-public class testDepartamento {
+public class TestDepartamento {
 
 	public static void main(String[] args) {
 

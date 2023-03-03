@@ -3,13 +3,14 @@ package javabeans;
 import java.sql.Date;
 
 public class Empleado {
-	private int idEmpleado, idPerfil, idDepartamento;
+	private int idEmpleado;
+	Perfil perfil;
+	Departamento departamento;
 	private String nombre, apellidos, email, password;
 	private Double salario;
 	private Date fechaIngreso, fechaNacimiento;
 	private char genero;
 
-	
 	// Devuelve la suma del salario y la comision (complemento se ha refactorizado a
 	// comisión).
 	public double salarioBruto() {
@@ -50,7 +51,34 @@ public class Empleado {
 
 	}
 
-	//Getters and Setters.
+	public Empleado(int idEmpleado, Perfil perfil, Departamento departamento, String nombre, String apellidos,
+			String email, String password, Double salario, Date fechaIngreso, Date fechaNacimiento, char genero) {
+		super();
+		this.idEmpleado = idEmpleado;
+		this.perfil = perfil;
+		this.departamento = departamento;
+		this.nombre = nombre;
+		this.apellidos = apellidos;
+		this.email = email;
+		this.password = password;
+		this.salario = salario;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaNacimiento = fechaNacimiento;
+		this.genero = genero;
+	}
+
+	public Empleado() {
+		super();
+	}
+
+	@Override
+	public String toString() {
+		return "Empleado [idEmpleado=" + idEmpleado + ", perfil=" + perfil + ", departamento=" + departamento
+				+ ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", password=" + password
+				+ ", salario=" + salario + ", fechaIngreso=" + fechaIngreso + ", fechaNacimiento=" + fechaNacimiento
+				+ ", genero=" + genero + "]";
+	}
+
 	public int getIdEmpleado() {
 		return idEmpleado;
 	}
@@ -59,20 +87,20 @@ public class Empleado {
 		this.idEmpleado = idEmpleado;
 	}
 
-	public int getIdPerfil() {
-		return idPerfil;
+	public Perfil getPerfil() {
+		return perfil;
 	}
 
-	public void setIdPerfil(int idPerfil) {
-		this.idPerfil = idPerfil;
+	public void setPerfil(Perfil perfil) {
+		this.perfil = perfil;
 	}
 
-	public int getIdDepartamento() {
-		return idDepartamento;
+	public Departamento getDepartamento() {
+		return departamento;
 	}
 
-	public void setIdDepartamento(int idDepartamento) {
-		this.idDepartamento = idDepartamento;
+	public void setDepartamento(Departamento departamento) {
+		this.departamento = departamento;
 	}
 
 	public String getNombre() {
@@ -136,34 +164,6 @@ public class Empleado {
 	}
 
 	public void setGenero(char genero) {
-		this.genero = genero;
-	}
-
-	@Override
-	public String toString() {
-		return "Empleado [idEmpleado=" + idEmpleado + ", idPerfil=" + idPerfil + ", idDepartamento=" + idDepartamento
-				+ ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email + ", password=" + password
-				+ ", salario=" + salario + ", fechaIngreso=" + fechaIngreso + ", fechaNacimiento=" + fechaNacimiento
-				+ ", genero=" + genero + "]";
-	}
-
-	public Empleado() {
-		super();
-	}
-
-	public Empleado(int idEmpleado, int idPerfil, int idDepartamento, String nombre, String apellidos, String email,
-			String password, Double salario, Date fechaIngreso, Date fechaNacimiento, char genero) {
-		super();
-		this.idEmpleado = idEmpleado;
-		this.idPerfil = idPerfil;
-		this.idDepartamento = idDepartamento;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
-		this.email = email;
-		this.password = password;
-		this.salario = salario;
-		this.fechaIngreso = fechaIngreso;
-		this.fechaNacimiento = fechaNacimiento;
 		this.genero = genero;
 	}
 
