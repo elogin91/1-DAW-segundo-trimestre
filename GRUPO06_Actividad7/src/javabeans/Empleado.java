@@ -1,6 +1,6 @@
 package javabeans;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Empleado {
 	private int idEmpleado;
@@ -50,21 +50,22 @@ public class Empleado {
 		return nombre + " " + apellidos;
 
 	}
-
+	
 	public Empleado(int idEmpleado, Perfil perfil, Departamento departamento, String nombre, String apellidos,
-			String email, String password, Double salario, Date fechaIngreso, Date fechaNacimiento, char genero) {
+			char genero, String email, String password, Double salario, Date fechaIngreso, Date fechaNacimiento) {
 		super();
 		this.idEmpleado = idEmpleado;
 		this.perfil = perfil;
 		this.departamento = departamento;
 		this.nombre = nombre;
 		this.apellidos = apellidos;
+		this.genero = genero;
 		this.email = email;
 		this.password = password;
 		this.salario = salario;
 		this.fechaIngreso = fechaIngreso;
 		this.fechaNacimiento = fechaNacimiento;
-		this.genero = genero;
+
 	}
 
 	public Empleado() {

@@ -1,5 +1,6 @@
 package daos;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,13 +25,12 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 			statement.setString(5, empleado.getEmail());
 			statement.setString(6, empleado.getPassword());
 			statement.setDouble(7, empleado.getSalario());
-			statement.setDate(8, empleado.getFechaIngreso());
-			statement.setDate(9, empleado.getFechaNacimiento());
+			statement.setDate(8, new Date(empleado.getFechaIngreso().getTime()));
+			statement.setDate(9, new Date(empleado.getFechaNacimiento().getTime()));
 			statement.setInt(10, empleado.getPerfil().getIdPerfil());
 			statement.setInt(11, empleado.getDepartamento().getIdDepartamento());
 
 			filas = statement.executeUpdate();
-			filas = 1;
 
 		} catch (SQLException e) {
 			System.out.println("Error al introducir un nuevo empleado.");
@@ -45,7 +45,6 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 		try {
 			statement.setInt(1, idEmpleado);
 			filas = statement.executeUpdate();
-			filas = 1;
 
 			return filas;
 
@@ -243,7 +242,9 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 		ResultSet resultSet;
 		try {
 			resultSet = statement.executeQuery();
-			salarioTotal = resultSet.getDouble(0);
+			if (resultSet.next()) {
+				salarioTotal = resultSet.getDouble(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -259,7 +260,9 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 		try {
 			statement.setInt(1, idDepar);
 			resultSet = statement.executeQuery();
-			salarioTotal = resultSet.getDouble(0);
+			if (resultSet.next()) {
+				salarioTotal = resultSet.getDouble(1);
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -279,13 +282,12 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 			statement.setString(4, empleado.getEmail());
 			statement.setString(5, empleado.getPassword());
 			statement.setDouble(6, empleado.getSalario());
-			statement.setDate(7, empleado.getFechaIngreso());
-			statement.setDate(8, empleado.getFechaNacimiento());
+			statement.setDate(7, new Date(empleado.getFechaIngreso().getTime()));
+			statement.setDate(8, new Date(empleado.getFechaNacimiento().getTime()));
 			statement.setInt(9, empleado.getPerfil().getIdPerfil());
 			statement.setInt(10, empleado.getDepartamento().getIdDepartamento());
 
 			filas = statement.executeUpdate();
-			filas = 1;
 
 			return filas;
 
