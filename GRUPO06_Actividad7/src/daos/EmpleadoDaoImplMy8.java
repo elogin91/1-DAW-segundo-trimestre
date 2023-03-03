@@ -60,4 +60,10 @@ public class EmpleadoDaoImplMy8 implements EmpleadoDao{
 		return null;
 	}
 
+	@Override
+	public int modificalEmpleado(Empleado empleado) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

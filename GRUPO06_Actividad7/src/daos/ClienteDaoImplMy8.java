@@ -106,4 +106,10 @@ public class ClienteDaoImplMy8 extends ConexionAbstract implements ClienteDao{
 		return filas;
 	}
 
+	@Override
+	public int modificarCliente(Cliente cliente) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }
