@@ -26,14 +26,14 @@ public class TestPerfiles {
 	}
 
 	private static void comprobarModificarCliente(PerfilDaoImplMy8 perfilDao) {
-		Perfil perfil = new Perfil(5, "Product Manager");
+		Perfil perfil = new Perfil(5, "Product Manager", 11.99);
 		int fila = perfilDao.modificarPerfil(perfil);
 		System.out.println(fila);
 
 	}
 
 	private static void comprobarAltaCliente(PerfilDaoImplMy8 perfilDao) {
-		Perfil perfil = new Perfil(5, "Product Galleta");
+		Perfil perfil = new Perfil(5, "Product Galleta", 12.00);
 		int fila = perfilDao.altaPerfil(perfil);
 		System.out.println(fila);
 	}

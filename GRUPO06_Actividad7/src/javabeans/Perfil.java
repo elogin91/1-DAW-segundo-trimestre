@@ -3,6 +3,15 @@ package javabeans;
 public class Perfil {
 	private int idPerfil;
 	private String nombre;
+	private double precioHora;
+
+	public double getPrecioHora() {
+		return precioHora;
+	}
+
+	public void setPrecioHora(double precioHora) {
+		this.precioHora = precioHora;
+	}
 
 	public int getIdPerfil() {
 		return idPerfil;
@@ -22,13 +31,14 @@ public class Perfil {
 
 	@Override
 	public String toString() {
-		return "Perfil [idPerfil=" + idPerfil + ", nombre=" + nombre + "]";
+		return "Perfil [idPerfil=" + idPerfil + ", nombre=" + nombre + ", precio_hora=" + precioHora +"]";
 	}
 
-	public Perfil(int idPerfil, String nombre) {
+	public Perfil(int idPerfil, String nombre, double precioHora) {
 		super();
 		this.idPerfil = idPerfil;
 		this.nombre = nombre;
+		this.precioHora = precioHora;
 	}
 
 	public Perfil() {

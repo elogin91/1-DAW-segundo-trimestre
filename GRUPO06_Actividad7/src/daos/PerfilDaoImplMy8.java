@@ -14,11 +14,13 @@ public class PerfilDaoImplMy8 extends ConexionAbstract implements PerfilDao {
 
 	@Override
 	public int altaPerfil(Perfil perfil) {
-		PreparedStatement statement = prepareStatement("Insert into perfiles values (?,?)");
+		PreparedStatement statement = prepareStatement("Insert into perfiles values (?,?,?)");
 
 		try {
 			statement.setInt(1, perfil.getIdPerfil());
 			statement.setString(2, perfil.getNombre());
+			statement.setDouble(3, perfil.getPrecioHora());
+
 
 			filas = statement.executeUpdate();
 
@@ -47,10 +49,12 @@ public class PerfilDaoImplMy8 extends ConexionAbstract implements PerfilDao {
 	
 	@Override
 	public int modificarPerfil(Perfil perfil) {
-		PreparedStatement statement = prepareStatement("Update perfiles set nombre = ? WHERE id_perfil=?");
+		PreparedStatement statement = prepareStatement("Update perfiles set nombre = ?, precio_hora = ? WHERE id_perfil=?");
 		try {
 			statement.setString(1, perfil.getNombre());
 			statement.setInt(2, perfil.getIdPerfil());
+			statement.setDouble(3, perfil.getPrecioHora());
+
 			filas = statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -74,6 +78,7 @@ public class PerfilDaoImplMy8 extends ConexionAbstract implements PerfilDao {
 
 				perfil.setIdPerfil(resultSet.getInt("id_perfil"));
 				perfil.setNombre(resultSet.getString("nombre"));
+				perfil.setPrecioHora(resultSet.getDouble("precio_hora"));
 			}
 
 		} catch (SQLException e) {
@@ -95,6 +100,7 @@ public class PerfilDaoImplMy8 extends ConexionAbstract implements PerfilDao {
 				Perfil perfil = new Perfil();
 				perfil.setIdPerfil(resultSet.getInt("id_perfil"));
 				perfil.setNombre(resultSet.getString("nombre"));
+				perfil.setPrecioHora(resultSet.getDouble("precio_hora"));
 				perfiles.add(perfil);
 			}
 

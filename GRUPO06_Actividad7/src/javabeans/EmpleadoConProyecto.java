@@ -2,30 +2,34 @@ package javabeans;
 
 import java.util.Date;
 
-public class ProyectoConEmpleado {
-	private int numeroOrden, idEmpleado, horasAsignadas;
+public class EmpleadoConProyecto {
+	private int numeroOrden, horasAsignadas;
 	private Proyecto proyecto;
 	private Empleado empleado;
 	private Date fechaIncorporacion;
 	
-	public ProyectoConEmpleado(int numeroOrden, int idEmpleado, int horasAsignadas, Proyecto proyecto,
+	//Método propio que calcula Horas * precio/hora
+	public double costeHorasAsignadas() {
+		return horasAsignadas * empleado.getPerfil().getPrecioHora();
+	}
+
+	public EmpleadoConProyecto(int numeroOrden, int horasAsignadas, Proyecto proyecto,
 			Empleado empleado, Date fechaIncorporacion) {
 		super();
 		this.numeroOrden = numeroOrden;
-		this.idEmpleado = idEmpleado;
 		this.horasAsignadas = horasAsignadas;
 		this.proyecto = proyecto;
 		this.empleado = empleado;
 		this.fechaIncorporacion = fechaIncorporacion;
 	}
 
-	public ProyectoConEmpleado() {
+	public EmpleadoConProyecto() {
 		super();
 	}
 
 	@Override
 	public String toString() {
-		return "ProyectoConEmpleado [numeroOrden=" + numeroOrden + ", idEmpleado=" + idEmpleado + ", horasAsignadas="
+		return "ProyectoConEmpleado [numeroOrden=" + numeroOrden +  ", horasAsignadas="
 				+ horasAsignadas + ", proyecto=" + proyecto + ", empleado=" + empleado + ", fechaIncorporacion="
 				+ fechaIncorporacion + "]";
 	}
@@ -36,14 +40,6 @@ public class ProyectoConEmpleado {
 
 	public void setNumeroOrden(int numeroOrden) {
 		this.numeroOrden = numeroOrden;
-	}
-
-	public int getIdEmpleado() {
-		return idEmpleado;
-	}
-
-	public void setIdEmpleado(int idEmpleado) {
-		this.idEmpleado = idEmpleado;
 	}
 
 	public int getHorasAsignadas() {
