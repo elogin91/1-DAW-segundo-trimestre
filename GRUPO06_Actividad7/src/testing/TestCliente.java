@@ -52,7 +52,7 @@ public class TestCliente {
 	private static void comprobarBuscarUno(ClienteDao clienteDao) {
 		Cliente cliente = clienteDao.buscarUno("A22222222");
 
-		if (clienteDao.buscarUno("A22222222") != null) {
+		if (cliente != null) {
 			System.out.println("El cliente que busca tiene el nombre : " + cliente.getNombre());
 		} else {
 			System.out.println("Cliente no encontrado.");
