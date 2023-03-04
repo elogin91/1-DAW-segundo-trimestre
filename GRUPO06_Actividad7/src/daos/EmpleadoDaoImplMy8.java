@@ -49,7 +49,33 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 			return filas;
 
 		} catch (SQLException e) {
-			System.out.println("Error al recolectar los datos");
+			System.out.println("Error al eliminar los datos");
+			e.printStackTrace();
+		}
+		return filas;
+	}
+
+	@Override
+	public int modificalEmpleado(Empleado empleado) {
+		PreparedStatement statement = prepareStatement(
+				"Update empleados set nombre = ?, apellidos = ?, genero = ?, email = ?, password = ?, salario = ?, fecha_ingreso = ?, fecha_nacimiento = ?, id_perfil = ?, id_depar = ? WHERE id_empl=?");
+		try {
+			statement.setInt(11, empleado.getIdEmpleado());
+			statement.setString(1, empleado.getNombre());
+			statement.setString(2, empleado.getApellidos());
+			statement.setString(3, String.valueOf(empleado.getGenero()));
+			statement.setString(4, empleado.getEmail());
+			statement.setString(5, empleado.getPassword());
+			statement.setDouble(6, empleado.getSalario());
+			statement.setDate(7, new Date(empleado.getFechaIngreso().getTime()));
+			statement.setDate(8, new Date(empleado.getFechaNacimiento().getTime()));
+			statement.setInt(9, empleado.getPerfil().getIdPerfil());
+			statement.setInt(10, empleado.getDepartamento().getIdDepartamento());
+
+			filas = statement.executeUpdate();
+
+		} catch (SQLException e) {
+			System.out.println("Error al modificar los datos");
 			e.printStackTrace();
 		}
 		return filas;
@@ -82,14 +108,13 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 				empleado.setPerfil(perfilDao.buscarUnPerfil(resultSet.getInt("id_perfil")));
 				empleado.setDepartamento(departamentoDao.buscarUnDepartamento(resultSet.getInt("id_depar")));
 
-				return empleado;
 			}
 
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();
 		}
-		return null;
+		return empleado;
 	}
 
 	@Override
@@ -239,9 +264,9 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 	public Double salarioTotal() {
 		Double salarioTotal = 0.0;
 		PreparedStatement statement = prepareStatement("SELECT sum(salario) FROM empleados");
-		ResultSet resultSet;
+
 		try {
-			resultSet = statement.executeQuery();
+			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				salarioTotal = resultSet.getDouble(1);
 			}
@@ -269,33 +294,4 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 
 		return salarioTotal;
 	}
-
-	@Override
-	public int modificalEmpleado(Empleado empleado) {
-		PreparedStatement statement = prepareStatement(
-				"Update empleados set nombre = ?, apellidos = ?, genero = ?, email = ?, password = ?, salario = ?, fecha_ingreso = ?, fecha_nacimiento = ?, id_perfil = ?, id_depar = ? WHERE id_empl=?");
-		try {
-			statement.setInt(11, empleado.getIdEmpleado());
-			statement.setString(1, empleado.getNombre());
-			statement.setString(2, empleado.getApellidos());
-			statement.setString(3, String.valueOf(empleado.getGenero()));
-			statement.setString(4, empleado.getEmail());
-			statement.setString(5, empleado.getPassword());
-			statement.setDouble(6, empleado.getSalario());
-			statement.setDate(7, new Date(empleado.getFechaIngreso().getTime()));
-			statement.setDate(8, new Date(empleado.getFechaNacimiento().getTime()));
-			statement.setInt(9, empleado.getPerfil().getIdPerfil());
-			statement.setInt(10, empleado.getDepartamento().getIdDepartamento());
-
-			filas = statement.executeUpdate();
-
-			return filas;
-
-		} catch (SQLException e) {
-			System.out.println("Error al recolectar los datos");
-			e.printStackTrace();
-		}
-		return filas;
-	}
-
 }
