@@ -6,22 +6,18 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import conexion.ConexionAbstract;
-
 import javabeans.Perfil;
 
-public class PerfilDaoImplMy8 extends ConexionAbstract implements PerfilDao {
+public class PerfilDaoImplMy8 extends AbstractDao implements PerfilDao {
 
 	@Override
 	public int altaPerfil(Perfil perfil) {
-		PreparedStatement statement = prepareStatement("Insert into perfiles values (?,?,?)");
-
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement("Insert into perfiles values (?,?,?)");
 			statement.setInt(1, perfil.getIdPerfil());
 			statement.setString(2, perfil.getNombre());
 			statement.setDouble(3, perfil.getPrecioHora());
-
-
 			filas = statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -33,28 +29,27 @@ public class PerfilDaoImplMy8 extends ConexionAbstract implements PerfilDao {
 
 	@Override
 	public int eliminarPerfil(int idPerfil) {
-		PreparedStatement statement = prepareStatement("Delete From perfiles WHERE id_perfil=?");
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement("Delete From perfiles WHERE id_perfil=?");
 			statement.setInt(1, idPerfil);
 			filas = statement.executeUpdate();
-
-			return filas;
-
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();
 		}
 		return filas;
 	}
-	
+
 	@Override
 	public int modificarPerfil(Perfil perfil) {
-		PreparedStatement statement = prepareStatement("Update perfiles set nombre = ?, precio_hora = ? WHERE id_perfil=?");
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn
+					.prepareStatement("Update perfiles set nombre = ?, precio_hora = ? WHERE id_perfil=?");
 			statement.setString(1, perfil.getNombre());
 			statement.setInt(2, perfil.getIdPerfil());
 			statement.setDouble(3, perfil.getPrecioHora());
-
 			filas = statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -66,16 +61,13 @@ public class PerfilDaoImplMy8 extends ConexionAbstract implements PerfilDao {
 
 	@Override
 	public Perfil buscarUnPerfil(int idPerfil) {
-		PreparedStatement statement = prepareStatement("Select * FROM perfiles WHERE id_perfil=?");
 		Perfil perfil = new Perfil();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM perfiles WHERE id_perfil=?");
 			statement.setInt(1, idPerfil);
 			ResultSet resultSet = statement.executeQuery();
-
 			if (resultSet.next()) {
-
 				perfil.setIdPerfil(resultSet.getInt("id_perfil"));
 				perfil.setNombre(resultSet.getString("nombre"));
 				perfil.setPrecioHora(resultSet.getDouble("precio_hora"));
@@ -90,11 +82,10 @@ public class PerfilDaoImplMy8 extends ConexionAbstract implements PerfilDao {
 
 	@Override
 	public List<Perfil> buscarTodosPerfiles() {
-		PreparedStatement statement = prepareStatement("Select * FROM perfiles");
 		List<Perfil> perfiles = new ArrayList<>();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM perfiles");
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Perfil perfil = new Perfil();

@@ -6,23 +6,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import conexion.ConexionAbstract;
 import javabeans.Departamento;
 
-public class DepartamentoDaoImplMy8 extends ConexionAbstract implements DepartamentoDao {
+public class DepartamentoDaoImplMy8 extends AbstractDao implements DepartamentoDao {
 
 	@Override
 	public int altaDepartamento(Departamento departamento) {
-		PreparedStatement statement = prepareStatement("Insert into departamentos values (?,?,?)");
-
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement("Insert into departamentos values (?,?,?)");
 			statement.setInt(1, departamento.getIdDepartamento());
 			statement.setString(2, departamento.getNombre());
 			statement.setString(3, departamento.getDireccion());
-
 			filas = statement.executeUpdate();
-			filas = 1;
-
 		} catch (SQLException e) {
 			System.out.println("Error al introducir un nuevo cliente.");
 			e.printStackTrace();
@@ -32,14 +28,11 @@ public class DepartamentoDaoImplMy8 extends ConexionAbstract implements Departam
 
 	@Override
 	public int eliminarDepartamento(int idDepartamento) {
-		PreparedStatement statement = prepareStatement("Delete From departamentos WHERE id_depar=?");
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement("Delete From departamentos WHERE id_depar=?");
 			statement.setInt(1, idDepartamento);
 			filas = statement.executeUpdate();
-			filas = 1;
-
-			return filas;
-
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();
@@ -49,18 +42,14 @@ public class DepartamentoDaoImplMy8 extends ConexionAbstract implements Departam
 
 	@Override
 	public int modificalDepartamento(Departamento departamento) {
-		PreparedStatement statement = prepareStatement(
-				"Update departamentos set nombre = ?, direccion = ? WHERE id_depar=?");
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement(
+					"Update departamentos set nombre = ?, direccion = ? WHERE id_depar=?");
 			statement.setString(1, departamento.getNombre());
 			statement.setString(2, departamento.getDireccion());
 			statement.setInt(3, departamento.getIdDepartamento());
-
 			filas = statement.executeUpdate();
-			filas = 1;
-
-			return filas;
-
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();
@@ -70,42 +59,36 @@ public class DepartamentoDaoImplMy8 extends ConexionAbstract implements Departam
 
 	@Override
 	public Departamento buscarUnDepartamento(int idDepartamento) {
-		PreparedStatement statement = prepareStatement("Select * FROM departamentos WHERE id_depar=?");
-
+		Departamento departamento = null;
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM departamentos WHERE id_depar=?");
 			statement.setInt(1, idDepartamento);
 			ResultSet resultSet = statement.executeQuery();
-
 			if (resultSet.next()) {
-				Departamento departamento = new Departamento();
+				departamento = new Departamento();
 				departamento.setIdDepartamento(resultSet.getInt("id_depar"));
 				departamento.setNombre(resultSet.getString("nombre"));
 				departamento.setDireccion(resultSet.getString("direccion"));
-				return departamento;
 			}
-
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();
 		}
-		return null;
+		return departamento;
 	}
 
 	@Override
 	public List<Departamento> buscarTodosDepartamentos() {
-		PreparedStatement statement = prepareStatement("Select * FROM departamentos");
 		List<Departamento> departamentos = new ArrayList<>();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM departamentos");
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Departamento departamento = new Departamento();
 				departamento.setIdDepartamento(resultSet.getInt("id_depar"));
 				departamento.setNombre(resultSet.getString("nombre"));
 				departamento.setDireccion(resultSet.getString("direccion"));
-
 				departamentos.add(departamento);
 			}
 
@@ -115,5 +98,4 @@ public class DepartamentoDaoImplMy8 extends ConexionAbstract implements Departam
 		}
 		return departamentos;
 	}
-
 }

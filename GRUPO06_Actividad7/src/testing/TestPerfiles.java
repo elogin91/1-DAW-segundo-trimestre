@@ -1,7 +1,6 @@
 package testing;
 
 import daos.PerfilDaoImplMy8;
-
 import javabeans.Perfil;
 
 public class TestPerfiles {

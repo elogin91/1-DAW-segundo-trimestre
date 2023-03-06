@@ -1,7 +1,7 @@
 package javabeans;
 
+import java.sql.Date;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 public class Proyecto {
 	private String idProyecto, descripcion, estado;

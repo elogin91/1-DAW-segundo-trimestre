@@ -7,17 +7,16 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import conexion.ConexionAbstract;
 import javabeans.Empleado;
 
-public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao {
+public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 
 	@Override
 	public int altaEmpleado(Empleado empleado) {
-
-		PreparedStatement statement = prepareStatement("Insert into empleados values (?,?,?,?,?,?,?,?,?,?,?)");
+		int filas = 0;
 
 		try {
+			PreparedStatement statement = conn.prepareStatement("Insert into empleados values (?,?,?,?,?,?,?,?,?,?,?)");
 			statement.setInt(1, empleado.getIdEmpleado());
 			statement.setString(2, empleado.getNombre());
 			statement.setString(3, empleado.getApellidos());
@@ -29,7 +28,6 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 			statement.setDate(9, new Date(empleado.getFechaNacimiento().getTime()));
 			statement.setInt(10, empleado.getPerfil().getIdPerfil());
 			statement.setInt(11, empleado.getDepartamento().getIdDepartamento());
-
 			filas = statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -41,13 +39,11 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 
 	@Override
 	public int eliminarEmpleado(int idEmpleado) {
-		PreparedStatement statement = prepareStatement("Delete From empleados WHERE id_empl=?");
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement("Delete From empleados WHERE id_empl=?");
 			statement.setInt(1, idEmpleado);
 			filas = statement.executeUpdate();
-
-			return filas;
-
 		} catch (SQLException e) {
 			System.out.println("Error al eliminar los datos");
 			e.printStackTrace();
@@ -57,9 +53,10 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 
 	@Override
 	public int modificalEmpleado(Empleado empleado) {
-		PreparedStatement statement = prepareStatement(
-				"Update empleados set nombre = ?, apellidos = ?, genero = ?, email = ?, password = ?, salario = ?, fecha_ingreso = ?, fecha_nacimiento = ?, id_perfil = ?, id_depar = ? WHERE id_empl=?");
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement(
+					"Update empleados set nombre = ?, apellidos = ?, genero = ?, email = ?, password = ?, salario = ?, fecha_ingreso = ?, fecha_nacimiento = ?, id_perfil = ?, id_depar = ? WHERE id_empl=?");
 			statement.setInt(11, empleado.getIdEmpleado());
 			statement.setString(1, empleado.getNombre());
 			statement.setString(2, empleado.getApellidos());
@@ -71,7 +68,6 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 			statement.setDate(8, new Date(empleado.getFechaNacimiento().getTime()));
 			statement.setInt(9, empleado.getPerfil().getIdPerfil());
 			statement.setInt(10, empleado.getDepartamento().getIdDepartamento());
-
 			filas = statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -83,19 +79,15 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 
 	@Override
 	public Empleado buscarUnEmpleado(int idEmpleado) {
-
-		PreparedStatement statement = prepareStatement("Select * FROM empleados WHERE id_empl=?");
 		PerfilDao perfilDao = new PerfilDaoImplMy8();
 		DepartamentoDao departamentoDao = new DepartamentoDaoImplMy8();
 		Empleado empleado = new Empleado();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM empleados WHERE id_empl=?");
 			statement.setInt(1, idEmpleado);
 			ResultSet resultSet = statement.executeQuery();
-
 			if (resultSet.next()) {
-
 				empleado.setIdEmpleado(resultSet.getInt("id_empl"));
 				empleado.setNombre(resultSet.getString("nombre"));
 				empleado.setApellidos(resultSet.getString("apellidos"));
@@ -107,9 +99,7 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 				empleado.setFechaNacimiento(resultSet.getDate("fecha_nacimiento"));
 				empleado.setPerfil(perfilDao.buscarUnPerfil(resultSet.getInt("id_perfil")));
 				empleado.setDepartamento(departamentoDao.buscarUnDepartamento(resultSet.getInt("id_depar")));
-
 			}
-
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();
@@ -119,14 +109,12 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 
 	@Override
 	public List<Empleado> buscarTodosEmpleados() {
-
-		PreparedStatement statement = prepareStatement("Select * FROM empleados");
 		List<Empleado> empleados = new ArrayList<>();
 		PerfilDao perfilDao = new PerfilDaoImplMy8();
 		DepartamentoDao departamentoDao = new DepartamentoDaoImplMy8();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM empleados");
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
 				Empleado empleado = new Empleado();
@@ -141,7 +129,6 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 				empleado.setFechaNacimiento(resultSet.getDate("fecha_nacimiento"));
 				empleado.setPerfil(perfilDao.buscarUnPerfil(resultSet.getInt("id_perfil")));
 				empleado.setDepartamento(departamentoDao.buscarUnDepartamento(resultSet.getInt("id_depar")));
-
 				empleados.add(empleado);
 			}
 
@@ -154,16 +141,14 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 
 	@Override
 	public List<Empleado> empleadosByDepartamento(int idDepar) {
-		PreparedStatement statement = prepareStatement("Select * FROM empleados WHERE id_depar = ?");
 		List<Empleado> empleados = new ArrayList<>();
 		PerfilDao perfilDao = new PerfilDaoImplMy8();
 		DepartamentoDao departamentoDao = new DepartamentoDaoImplMy8();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM empleados WHERE id_depar = ?");
 			statement.setInt(1, idDepar);
 			ResultSet resultSet = statement.executeQuery();
-
 			while (resultSet.next()) {
 				Empleado empleado = new Empleado();
 				empleado.setIdEmpleado(resultSet.getInt("id_empl"));
@@ -177,7 +162,6 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 				empleado.setFechaNacimiento(resultSet.getDate("fecha_nacimiento"));
 				empleado.setPerfil(perfilDao.buscarUnPerfil(resultSet.getInt("id_perfil")));
 				empleado.setDepartamento(departamentoDao.buscarUnDepartamento(resultSet.getInt("id_depar")));
-
 				empleados.add(empleado);
 			}
 
@@ -190,13 +174,12 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 
 	@Override
 	public List<Empleado> empleadosBySexo(char sexo) {
-		PreparedStatement statement = prepareStatement("Select * FROM empleados WHERE genero = ?");
 		List<Empleado> empleados = new ArrayList<>();
 		PerfilDao perfilDao = new PerfilDaoImplMy8();
 		DepartamentoDao departamentoDao = new DepartamentoDaoImplMy8();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM empleados WHERE genero = ?");
 			statement.setString(1, String.valueOf(sexo));
 			ResultSet resultSet = statement.executeQuery();
 
@@ -213,7 +196,6 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 				empleado.setFechaNacimiento(resultSet.getDate("fecha_nacimiento"));
 				empleado.setPerfil(perfilDao.buscarUnPerfil(resultSet.getInt("id_perfil")));
 				empleado.setDepartamento(departamentoDao.buscarUnDepartamento(resultSet.getInt("id_depar")));
-
 				empleados.add(empleado);
 			}
 
@@ -226,13 +208,13 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 
 	@Override
 	public List<Empleado> empleadosByApellido(String subcadena) {
-		PreparedStatement statement = prepareStatement("Select * FROM empleados WHERE apellidos = ?");
+
 		List<Empleado> empleados = new ArrayList<>();
 		PerfilDao perfilDao = new PerfilDaoImplMy8();
 		DepartamentoDao departamentoDao = new DepartamentoDaoImplMy8();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM empleados WHERE apellidos = ?");
 			statement.setString(1, subcadena);
 			ResultSet resultSet = statement.executeQuery();
 
@@ -263,9 +245,9 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 	@Override
 	public Double salarioTotal() {
 		Double salarioTotal = 0.0;
-		PreparedStatement statement = prepareStatement("SELECT sum(salario) FROM empleados");
 
 		try {
+			PreparedStatement statement = conn.prepareStatement("SELECT sum(salario) FROM empleados");
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				salarioTotal = resultSet.getDouble(1);
@@ -280,9 +262,10 @@ public class EmpleadoDaoImplMy8 extends ConexionAbstract implements EmpleadoDao 
 	@Override
 	public Double salarioTotal(int idDepar) {
 		Double salarioTotal = 0.0;
-		PreparedStatement statement = prepareStatement("SELECT sum(salario) FROM empleados Where id_depar = ?");
 		ResultSet resultSet;
 		try {
+			PreparedStatement statement = conn
+					.prepareStatement("SELECT sum(salario) FROM empleados Where id_depar = ?");
 			statement.setInt(1, idDepar);
 			resultSet = statement.executeQuery();
 			if (resultSet.next()) {

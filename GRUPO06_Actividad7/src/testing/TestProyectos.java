@@ -1,17 +1,14 @@
 package testing;
 
+import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import daos.ClienteDao;
 import daos.ClienteDaoImplMy8;
-
 import daos.EmpleadoDao;
 import daos.EmpleadoDaoImplMy8;
-
 import daos.ProyectoDao;
 import daos.ProyectoDaoImplMy8;
-
 import javabeans.Proyecto;
 
 public class TestProyectos {
@@ -93,10 +90,9 @@ public class TestProyectos {
 		System.out.println("---------------------Comprobando modificar proyecto");
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 		EmpleadoDao jefeProyectoDao = new EmpleadoDaoImplMy8();
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 
 		Proyecto proyecto = new Proyecto("FOR2021004", "Formación técnicos en marketing MODIFICADO", "ACTIVO",
-				dateFormatter.parse("2020-01-13"), dateFormatter.parse("2025-01-13"), null, 75000.00, 50000.00,
+				Date.valueOf("2020-01-13"), Date.valueOf("2025-01-13"), null, 75000.00, 50000.00,
 				48765.99, jefeProyectoDao.buscarUnEmpleado(114), clienteDao.buscarUno("A22222222"));
 
 		int fila = proyectoDao.modificarProyecto(proyecto);
@@ -107,10 +103,9 @@ public class TestProyectos {
 		System.out.println("---------------------Comprobando alta proyecto");
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 		EmpleadoDao jefeProyectoDao = new EmpleadoDaoImplMy8();
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 
 		Proyecto proyecto = new Proyecto("FOR2021004", "Formación técnicos en marketing", "ACTIVO",
-				dateFormatter.parse("2020-01-13"), dateFormatter.parse("2025-01-13"), null, 75000.00, 50000.00,
+				Date.valueOf("2020-01-13"), Date.valueOf("2025-01-13"), null, 75000.00, 50000.00,
 				48765.99, jefeProyectoDao.buscarUnEmpleado(114), clienteDao.buscarUno("A22222222"));
 
 		int fila = proyectoDao.altaProyecto(proyecto);

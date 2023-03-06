@@ -6,50 +6,41 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import conexion.ConexionAbstract;
 import javabeans.Cliente;
 
-public class ClienteDaoImplMy8 extends ConexionAbstract implements ClienteDao{
-
+public class ClienteDaoImplMy8 extends AbstractDao implements ClienteDao {
 	@Override
 	public Cliente buscarUno(String cif) {
-		
-		PreparedStatement statement = prepareStatement("Select * FROM clientes WHERE cif=?" );
-		
+		Cliente cliente = null;
 		try {
-			
+			PreparedStatement statement = conn.prepareStatement("Select * FROM clientes WHERE cif=?");
 			statement.setString(1, cif);
-			 ResultSet resultSet = statement.executeQuery();
-			
+			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
-				Cliente cliente = new Cliente ();
+				cliente = new Cliente();
 				cliente.setCif(resultSet.getString("cif"));
 				cliente.setNombre(resultSet.getString("nombre"));
 				cliente.setApellidos(resultSet.getString("apellidos"));
 				cliente.setDomicilio(resultSet.getString("domicilio"));
 				cliente.setFacturacionAnual(resultSet.getDouble("facturacion_anual"));
 				cliente.setNumeroEmpleado(resultSet.getInt("numero_empleados"));
-				return cliente;
 			}
-			
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();
 		}
-		return null;
+		return cliente;
 	}
 
 	@Override
 	public List<Cliente> buscarTodo() {
-		
-		PreparedStatement statement = prepareStatement("Select * FROM clientes" );
-		List<Cliente> clientes = new ArrayList <>();
-		
+		List<Cliente> clientes = new ArrayList<>();
+
 		try {
-			
+			PreparedStatement statement = conn.prepareStatement("Select * FROM clientes");
 			ResultSet resultSet = statement.executeQuery();
 			while (resultSet.next()) {
-				Cliente cliente =new Cliente();
+				Cliente cliente = new Cliente();
 				cliente.setCif(resultSet.getString("cif"));
 				cliente.setNombre(resultSet.getString("nombre"));
 				cliente.setApellidos(resultSet.getString("apellidos"));
@@ -58,7 +49,6 @@ public class ClienteDaoImplMy8 extends ConexionAbstract implements ClienteDao{
 				cliente.setNumeroEmpleado(resultSet.getInt("numero_empleados"));
 				clientes.add(cliente);
 			}
-			
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();
@@ -68,10 +58,10 @@ public class ClienteDaoImplMy8 extends ConexionAbstract implements ClienteDao{
 
 	@Override
 	public int altaCliente(Cliente cliente) {
+		int filas = 0;
 
-		PreparedStatement statement =prepareStatement("Insert into clientes values (?,?,?,?,?,?)");
-		
 		try {
+			PreparedStatement statement = conn.prepareStatement("Insert into clientes values (?,?,?,?,?,?)");
 			statement.setString(1, cliente.getCif());
 			statement.setString(2, cliente.getNombre());
 			statement.setString(3, cliente.getApellidos());
@@ -79,8 +69,6 @@ public class ClienteDaoImplMy8 extends ConexionAbstract implements ClienteDao{
 			statement.setDouble(5, cliente.getFacturacionAnual());
 			statement.setInt(6, cliente.getNumeroEmpleado());
 			filas = statement.executeUpdate();
-			filas = 1;
-
 		} catch (SQLException e) {
 			System.out.println("Error al introducir un nuevo cliente.");
 			e.printStackTrace();
@@ -90,15 +78,11 @@ public class ClienteDaoImplMy8 extends ConexionAbstract implements ClienteDao{
 
 	@Override
 	public int eliminarCliente(String cif) {
-
-		PreparedStatement statement = prepareStatement("Delete From Clientes WHERE cif=?" );
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement("Delete From Clientes WHERE cif=?");
 			statement.setString(1, cif);
 			filas = statement.executeUpdate();
-			filas = 1;
-			
-			return filas;	
-			
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();
@@ -108,8 +92,10 @@ public class ClienteDaoImplMy8 extends ConexionAbstract implements ClienteDao{
 
 	@Override
 	public int modificarCliente(Cliente cliente) {
-		PreparedStatement statement = prepareStatement("Update clientes set nombre = ?, apellidos = ?, domicilio = ?, facturacion_anual = ?, numero_empleados= ? WHERE cif=?" );
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement(
+					"Update clientes set nombre = ?, apellidos = ?, domicilio = ?, facturacion_anual = ?, numero_empleados= ? WHERE cif=?");
 			statement.setString(1, cliente.getNombre());
 			statement.setString(2, cliente.getApellidos());
 			statement.setString(3, cliente.getDomicilio());
@@ -117,10 +103,6 @@ public class ClienteDaoImplMy8 extends ConexionAbstract implements ClienteDao{
 			statement.setInt(5, cliente.getNumeroEmpleado());
 			statement.setString(6, cliente.getCif());
 			filas = statement.executeUpdate();
-			filas = 1;
-			
-			return filas;	
-			
 		} catch (SQLException e) {
 			System.out.println("Error al recolectar los datos");
 			e.printStackTrace();

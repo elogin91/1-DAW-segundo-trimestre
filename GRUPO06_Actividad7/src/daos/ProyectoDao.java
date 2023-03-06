@@ -2,7 +2,6 @@ package daos;
 
 import java.util.List;
 
-
 import javabeans.Proyecto;
 
 public interface ProyectoDao {

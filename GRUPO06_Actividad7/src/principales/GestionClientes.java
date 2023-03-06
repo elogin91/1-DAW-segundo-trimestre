@@ -64,7 +64,6 @@ public class GestionClientes {
 	}
 
 	private void ejecutarMostrarTodosClientes() {
-		System.out.println("Introduzca el cif del cliente a mostrar:");
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 
 		System.out.println("Mostrando Todos los Clientes:");

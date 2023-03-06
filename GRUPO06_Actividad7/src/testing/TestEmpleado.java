@@ -1,7 +1,7 @@
 package testing;
 
+import java.sql.Date;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 
 import daos.DepartamentoDao;
 import daos.DepartamentoDaoImplMy8;
@@ -9,7 +9,6 @@ import daos.EmpleadoDao;
 import daos.EmpleadoDaoImplMy8;
 import daos.PerfilDao;
 import daos.PerfilDaoImplMy8;
-
 import javabeans.Empleado;
 
 public class TestEmpleado {
@@ -77,10 +76,10 @@ public class TestEmpleado {
 		System.out.println("Comprobando modificar cliente");
 		PerfilDao perfilDao = new PerfilDaoImplMy8();
 		DepartamentoDao departamentoDao = new DepartamentoDaoImplMy8();
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+
 		Empleado empleado = new Empleado(150, perfilDao.buscarUnPerfil(1), departamentoDao.buscarUnDepartamento(10),
-				"Luisa", "Pérez", 'm', "nuevoluisita@gmail.com", "1234", 14000.99, dateFormatter.parse("2020-01-13"),
-				dateFormatter.parse("2020-01-13"));
+				"Luisa", "Pérez", 'm', "nuevoluisita@gmail.com", "1234", 14000.99, Date.valueOf("2020-01-13"),
+				Date.valueOf("2020-01-13"));
 		int fila = empleadoDao.modificalEmpleado(empleado);
 		System.out.println(fila);
 	}
@@ -89,10 +88,10 @@ public class TestEmpleado {
 		System.out.println("Comprobando alta cliente");
 		PerfilDao perfilDao = new PerfilDaoImplMy8();
 		DepartamentoDao departamentoDao = new DepartamentoDaoImplMy8();
-		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+
 		Empleado empleado = new Empleado(150, perfilDao.buscarUnPerfil(1), departamentoDao.buscarUnDepartamento(10),
-				"Luisa", "Perez", 'm', "luisita@gmail.com", "1234", 13000.99, dateFormatter.parse("2020-01-13"),
-				dateFormatter.parse("2020-01-13"));
+				"Luisa", "Perez", 'm', "luisita@gmail.com", "1234", 13000.99, Date.valueOf("2020-01-13"),
+				Date.valueOf("2020-01-13"));
 		int fila = empleadoDao.altaEmpleado(empleado);
 		System.out.println(fila);
 	}

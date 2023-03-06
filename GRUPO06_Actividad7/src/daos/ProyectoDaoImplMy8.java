@@ -1,27 +1,27 @@
 package daos;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
-import conexion.ConexionAbstract;
 import javabeans.Proyecto;
 
-public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao {
+public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 
 	@Override
 	public int altaProyecto(Proyecto proyecto) {
-		PreparedStatement statement = prepareStatement("Insert into proyectos values (?,?,?,?,?,?,?,?,?,?,?)");
 		Date fechaFinReal = null;
+		int filas = 0;
 
 		if (!(proyecto.getFechaFinReal() == null)) {
 			fechaFinReal = new Date(proyecto.getFechaFinReal().getTime());
 		}
 
 		try {
+			PreparedStatement statement = conn.prepareStatement("Insert into proyectos values (?,?,?,?,?,?,?,?,?,?,?)");
 			statement.setString(1, proyecto.getIdProyecto());
 			statement.setString(2, proyecto.getDescripcion());
 			statement.setDate(3, new Date(proyecto.getFechaInicio().getTime()));
@@ -33,7 +33,6 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 			statement.setString(9, proyecto.getEstado());
 			statement.setInt(10, proyecto.getJefeProyecto().getIdEmpleado());
 			statement.setString(11, proyecto.getCliente().getCif());
-
 			filas = statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -45,13 +44,11 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public int eliminarProyecto(String idProyecto) {
-		PreparedStatement statement = prepareStatement("Delete From proyectos WHERE id_proyecto=?");
+		int filas = 0;
 		try {
+			PreparedStatement statement = conn.prepareStatement("Delete From proyectos WHERE id_proyecto=?");
 			statement.setString(1, idProyecto);
 			filas = statement.executeUpdate();
-
-			return filas;
-
 		} catch (SQLException e) {
 			System.out.println("Error al eliminar los datos");
 			e.printStackTrace();
@@ -61,15 +58,15 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public int modificarProyecto(Proyecto proyecto) {
-		PreparedStatement statement = prepareStatement(
-				"Update proyectos set descripcion = ?, fecha_inicio = ?, fecha_fin_previsto = ?, fecha_fin_real = ?, venta_previsto = ?, costes_previsto = ?, coste_real = ?, estado = ?, jefe_proyecto = ?, cif = ? WHERE id_proyecto=?");
 		Date fechaFinReal = null;
-
+		int filas = 0;
 		if (!(proyecto.getFechaFinReal() == null)) {
 			fechaFinReal = new Date(proyecto.getFechaFinReal().getTime());
 		}
-		
+
 		try {
+			PreparedStatement statement = conn.prepareStatement(
+					"Update proyectos set descripcion = ?, fecha_inicio = ?, fecha_fin_previsto = ?, fecha_fin_real = ?, venta_previsto = ?, costes_previsto = ?, coste_real = ?, estado = ?, jefe_proyecto = ?, cif = ? WHERE id_proyecto=?");
 			statement.setString(11, proyecto.getIdProyecto());
 			statement.setString(1, proyecto.getDescripcion());
 			statement.setDate(2, new Date(proyecto.getFechaInicio().getTime()));
@@ -81,9 +78,7 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 			statement.setString(8, proyecto.getEstado());
 			statement.setInt(9, proyecto.getJefeProyecto().getIdEmpleado());
 			statement.setString(10, proyecto.getCliente().getCif());
-
 			filas = statement.executeUpdate();
-
 		} catch (SQLException e) {
 			System.out.println("Error al modificar los datos");
 			e.printStackTrace();
@@ -93,19 +88,16 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public Proyecto buscarUnProyecto(String idProyecto) {
-		PreparedStatement statement = prepareStatement("Select * FROM proyectos WHERE id_proyecto=?");
-
 		Proyecto proyecto = new Proyecto();
 		EmpleadoDao empleadoDao = new EmpleadoDaoImplMy8();
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM proyectos WHERE id_proyecto=?");
 			statement.setString(1, idProyecto);
 			ResultSet resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
-
 				proyecto.setIdProyecto(resultSet.getString("id_proyecto"));
 				proyecto.setDescripcion(resultSet.getString("descripcion"));
 				proyecto.setFechaInicio(resultSet.getDate("fecha_inicio"));
@@ -129,16 +121,13 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public List<Proyecto> buscarTodosProyectos() {
-
-		PreparedStatement statement = prepareStatement("Select * FROM proyectos ");
 		List<Proyecto> proyectos = new ArrayList<>();
 		EmpleadoDao empleadoDao = new EmpleadoDaoImplMy8();
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement("Select * FROM proyectos ");
 			ResultSet resultSet = statement.executeQuery();
-
 			while (resultSet.next()) {
 				Proyecto proyecto = new Proyecto();
 				proyecto.setIdProyecto(resultSet.getString("id_proyecto"));
@@ -153,7 +142,6 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 				proyecto.setJefeProyecto(empleadoDao.buscarUnEmpleado(resultSet.getInt("jefe_proyecto")));
 				proyecto.setCliente(clienteDao.buscarUno(resultSet.getString("cif")));
 				proyectos.add(proyecto);
-
 			}
 
 		} catch (SQLException e) {
@@ -165,15 +153,15 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public List<Proyecto> proyectosByEstado(String estado) {
-		PreparedStatement statement = prepareStatement("Select * FROM proyectos where estado = ? ");
+
 		List<Proyecto> proyectos = new ArrayList<>();
 		EmpleadoDao empleadoDao = new EmpleadoDaoImplMy8();
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 
 		try {
+			PreparedStatement statement = conn.prepareStatement("Select * FROM proyectos where estado = ? ");
 			statement.setString(1, estado);
 			ResultSet resultSet = statement.executeQuery();
-
 			while (resultSet.next()) {
 				Proyecto proyecto = new Proyecto();
 				proyecto.setIdProyecto(resultSet.getString("id_proyecto"));
@@ -200,12 +188,12 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public List<Proyecto> proyectosByCliente(String cif) {
-		PreparedStatement statement = prepareStatement("Select * FROM proyectos where cif = ? ");
 		List<Proyecto> proyectos = new ArrayList<>();
 		EmpleadoDao empleadoDao = new EmpleadoDaoImplMy8();
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 
 		try {
+			PreparedStatement statement = conn.prepareStatement("Select * FROM proyectos where cif = ? ");
 			statement.setString(1, cif);
 			ResultSet resultSet = statement.executeQuery();
 
@@ -235,13 +223,13 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public List<Proyecto> proyectosByJefeProyectoAndByEstado(int jefeProyecto, String estado) {
-		PreparedStatement statement = prepareStatement(
-				"Select * FROM proyectos where estado = ? AND jefe_proyecto = ?");
 		List<Proyecto> proyectos = new ArrayList<>();
 		EmpleadoDao empleadoDao = new EmpleadoDaoImplMy8();
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 
 		try {
+			PreparedStatement statement = conn
+					.prepareStatement("Select * FROM proyectos where estado = ? AND jefe_proyecto = ?");
 			statement.setString(1, estado);
 			statement.setInt(2, jefeProyecto);
 			ResultSet resultSet = statement.executeQuery();
@@ -272,12 +260,11 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public double importesVentaProyectosTerminados() {
-		PreparedStatement statement = prepareStatement(
-				"SELECT SUM(venta_previsto) FROM proyectos Where fecha_fin_real< now()");
 		double ventasProyectosTerminados = 0.0;
 
 		try {
-
+			PreparedStatement statement = conn
+					.prepareStatement("SELECT SUM(venta_previsto) FROM proyectos Where fecha_fin_real< now()");
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				ventasProyectosTerminados = resultSet.getDouble(1);
@@ -292,12 +279,11 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public double margenBrutoProyectosTerminados() {
-		PreparedStatement statement = prepareStatement(
-				"SELECT (venta_previsto - coste_real) FROM proyectos Where fecha_fin_real< now()");
 		double margenProyectosTerminados = 0.0;
 
 		try {
-
+			PreparedStatement statement = conn.prepareStatement(
+					"SELECT (venta_previsto - coste_real) FROM proyectos Where fecha_fin_real< now()");
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				margenProyectosTerminados = resultSet.getDouble(1);
@@ -312,11 +298,12 @@ public class ProyectoDaoImplMy8 extends ConexionAbstract implements ProyectoDao 
 
 	@Override
 	public int diasATerminoProyectoActivo(String codigoProyecto) {
-		PreparedStatement statement = prepareStatement(
-				"SELECT datediff(now(), fecha_fin_previsto) FROM proyectos Where  fecha_fin_real IS null AND id_proyecto = ?");
+
 		int diasParaTermino = 0;
 
 		try {
+			PreparedStatement statement = conn.prepareStatement(
+					"SELECT datediff(now(), fecha_fin_previsto) FROM proyectos Where  fecha_fin_real IS null AND id_proyecto = ?");
 			statement.setString(1, codigoProyecto);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {

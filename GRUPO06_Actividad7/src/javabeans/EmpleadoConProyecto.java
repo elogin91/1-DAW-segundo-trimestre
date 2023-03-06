@@ -1,6 +1,6 @@
 package javabeans;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class EmpleadoConProyecto {
 	private int numeroOrden, horasAsignadas;

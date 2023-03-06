@@ -2,7 +2,6 @@ package testing;
 
 import daos.DepartamentoDao;
 import daos.DepartamentoDaoImplMy8;
-
 import javabeans.Departamento;
 
 public class TestDepartamento {
