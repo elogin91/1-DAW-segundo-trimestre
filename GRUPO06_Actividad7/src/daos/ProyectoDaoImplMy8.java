@@ -17,15 +17,15 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		int filas = 0;
 
 		if (!(proyecto.getFechaFinReal() == null)) {
-			fechaFinReal = new Date(proyecto.getFechaFinReal().getTime());
+			fechaFinReal = proyecto.getFechaFinReal();
 		}
 
 		try {
 			PreparedStatement statement = conn.prepareStatement("Insert into proyectos values (?,?,?,?,?,?,?,?,?,?,?)");
 			statement.setString(1, proyecto.getIdProyecto());
 			statement.setString(2, proyecto.getDescripcion());
-			statement.setDate(3, new Date(proyecto.getFechaInicio().getTime()));
-			statement.setDate(4, new Date(proyecto.getFechaFinPrevisto().getTime()));
+			statement.setDate(3, proyecto.getFechaInicio());
+			statement.setDate(4, proyecto.getFechaFinPrevisto());
 			statement.setDate(5, fechaFinReal);
 			statement.setDouble(6, proyecto.getVentaPrevista());
 			statement.setDouble(7, proyecto.getCostePrevisto());
@@ -61,7 +61,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		Date fechaFinReal = null;
 		int filas = 0;
 		if (!(proyecto.getFechaFinReal() == null)) {
-			fechaFinReal = new Date(proyecto.getFechaFinReal().getTime());
+			fechaFinReal = proyecto.getFechaFinReal();
 		}
 
 		try {
@@ -69,8 +69,8 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 					"Update proyectos set descripcion = ?, fecha_inicio = ?, fecha_fin_previsto = ?, fecha_fin_real = ?, venta_previsto = ?, costes_previsto = ?, coste_real = ?, estado = ?, jefe_proyecto = ?, cif = ? WHERE id_proyecto=?");
 			statement.setString(11, proyecto.getIdProyecto());
 			statement.setString(1, proyecto.getDescripcion());
-			statement.setDate(2, new Date(proyecto.getFechaInicio().getTime()));
-			statement.setDate(3, new Date(proyecto.getFechaFinPrevisto().getTime()));
+			statement.setDate(2, proyecto.getFechaInicio());
+			statement.setDate(3, proyecto.getFechaFinPrevisto());
 			statement.setDate(4, fechaFinReal);
 			statement.setDouble(5, proyecto.getVentaPrevista());
 			statement.setDouble(6, proyecto.getCostePrevisto());

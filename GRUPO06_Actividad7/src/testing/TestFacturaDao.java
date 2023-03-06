@@ -6,7 +6,7 @@ import daos.ProyectoDao;
 import daos.ProyectoDaoImplMy8;
 import javabeans.Factura;
 
-public class TestFactura {
+public class TestFacturaDao {
 
 	public static void main(String[] args) {
 

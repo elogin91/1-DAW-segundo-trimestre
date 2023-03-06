@@ -3,7 +3,7 @@ package testing;
 import daos.PerfilDaoImplMy8;
 import javabeans.Perfil;
 
-public class TestPerfiles {
+public class TestPerfilesDao {
 
 	public static void main(String[] args) {
 

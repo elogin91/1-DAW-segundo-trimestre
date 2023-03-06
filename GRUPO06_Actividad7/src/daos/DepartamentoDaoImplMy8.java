@@ -41,7 +41,7 @@ public class DepartamentoDaoImplMy8 extends AbstractDao implements DepartamentoD
 	}
 
 	@Override
-	public int modificalDepartamento(Departamento departamento) {
+	public int modificarDepartamento(Departamento departamento) {
 		int filas = 0;
 		try {
 			PreparedStatement statement = conn.prepareStatement(

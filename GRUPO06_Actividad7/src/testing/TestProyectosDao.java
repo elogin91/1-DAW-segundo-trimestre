@@ -11,7 +11,7 @@ import daos.ProyectoDao;
 import daos.ProyectoDaoImplMy8;
 import javabeans.Proyecto;
 
-public class TestProyectos {
+public class TestProyectosDao {
 
 	public static void main(String[] args) throws Exception {
 

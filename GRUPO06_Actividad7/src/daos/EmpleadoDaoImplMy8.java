@@ -1,6 +1,5 @@
 package daos;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,8 +23,8 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 			statement.setString(5, empleado.getEmail());
 			statement.setString(6, empleado.getPassword());
 			statement.setDouble(7, empleado.getSalario());
-			statement.setDate(8, new Date(empleado.getFechaIngreso().getTime()));
-			statement.setDate(9, new Date(empleado.getFechaNacimiento().getTime()));
+			statement.setDate(8, empleado.getFechaIngreso());
+			statement.setDate(9, empleado.getFechaNacimiento());
 			statement.setInt(10, empleado.getPerfil().getIdPerfil());
 			statement.setInt(11, empleado.getDepartamento().getIdDepartamento());
 			filas = statement.executeUpdate();
@@ -52,7 +51,7 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 	}
 
 	@Override
-	public int modificalEmpleado(Empleado empleado) {
+	public int modificarEmpleado(Empleado empleado) {
 		int filas = 0;
 		try {
 			PreparedStatement statement = conn.prepareStatement(
@@ -64,8 +63,8 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 			statement.setString(4, empleado.getEmail());
 			statement.setString(5, empleado.getPassword());
 			statement.setDouble(6, empleado.getSalario());
-			statement.setDate(7, new Date(empleado.getFechaIngreso().getTime()));
-			statement.setDate(8, new Date(empleado.getFechaNacimiento().getTime()));
+			statement.setDate(7, empleado.getFechaIngreso());
+			statement.setDate(8, empleado.getFechaNacimiento());
 			statement.setInt(9, empleado.getPerfil().getIdPerfil());
 			statement.setInt(10, empleado.getDepartamento().getIdDepartamento());
 			filas = statement.executeUpdate();

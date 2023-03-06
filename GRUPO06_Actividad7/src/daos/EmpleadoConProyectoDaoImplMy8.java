@@ -1,6 +1,5 @@
 package daos;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +20,7 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 			statement.setString(2, proyectoEmpleado.getProyecto().getIdProyecto());
 			statement.setInt(3, proyectoEmpleado.getEmpleado().getIdEmpleado());
 			statement.setInt(4, proyectoEmpleado.getHorasAsignadas());
-			statement.setDate(5, new Date(proyectoEmpleado.getFechaIncorporacion().getTime()));
+			statement.setDate(5, proyectoEmpleado.getFechaIncorporacion());
 			filas = statement.executeUpdate();
 
 		} catch (SQLException e) {
@@ -58,7 +57,7 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 			statement.setString(1, proyectoEmpleado.getProyecto().getIdProyecto());
 			statement.setInt(2, proyectoEmpleado.getEmpleado().getIdEmpleado());
 			statement.setInt(3, proyectoEmpleado.getHorasAsignadas());
-			statement.setDate(4, new Date(proyectoEmpleado.getFechaIncorporacion().getTime()));
+			statement.setDate(4, proyectoEmpleado.getFechaIncorporacion());
 			filas = statement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Error al modificar los datos");
