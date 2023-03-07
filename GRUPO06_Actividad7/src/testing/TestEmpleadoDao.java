@@ -47,7 +47,7 @@ public class TestEmpleadoDao {
 	// Comprobamos el método empleadosByApellido.
 	private static void comprobarEmpleadosByApellido(EmpleadoDao empleadoDao) {
 		System.out.println("--------------------Comprobando empleados por apellido:");
-		for (Empleado empleado : empleadoDao.empleadosByApellido("Diaz")) {
+		for (Empleado empleado : empleadoDao.empleadosByApellido("az")) {
 			System.out.println(empleado);
 		}
 

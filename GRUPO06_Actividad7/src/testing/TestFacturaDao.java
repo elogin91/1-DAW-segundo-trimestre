@@ -23,7 +23,7 @@ public class TestFacturaDao {
 		comprobarEliminar(facturaDao);
 	}
 
-	//Comprobamos el método modificarFactura.
+	// Comprobamos el método modificarFactura.
 	private static void comprobarModidificarUno(FacturaDao facturaDao) {
 		System.out.println("--------------------- Comprobar modificar una  FACTURA:");
 		ProyectoDao proyectoDao = new ProyectoDaoImplMy8();
@@ -34,7 +34,7 @@ public class TestFacturaDao {
 
 	}
 
-	//Comprobamos el método altaFactura.
+	// Comprobamos el método altaFactura.
 	private static void compobarAlta(FacturaDao facturaDao) {
 		System.out.println("--------------------- Comprobar alta una  FACTURA:");
 		ProyectoDao proyectoDao = new ProyectoDaoImplMy8();
@@ -43,19 +43,19 @@ public class TestFacturaDao {
 		System.out.println("Número de filas afectadas por el statement: " + fila);
 	}
 
-	//Comprobamos el método eliminarFactura.
+	// Comprobamos el método eliminarFactura.
 	private static void comprobarEliminar(FacturaDao facturaDao) {
 		System.out.println("--------------------- Comprobar eliminar una  FACTURA:");
 		int fila = facturaDao.eliminarFactura("F2020002");
 		System.out.println("Número de filas afectadas por el statement: " + fila);
 	}
 
-	//Comprobamos el método buscarTodasFacturas.
+	// Comprobamos el método buscarTodasFacturas.
 	private static void comprobarBuscarTodo(FacturaDao facturaDao) {
 		System.out.println("--------------------- Comprobar buscar TODAS las FACTURAS:");
 		imprimirTodas(facturaDao);
 	}
-	
+
 	// Método que imprime por consola las facturas de la lista que devuelve el
 	// método
 	// buscarTodo.
@@ -65,7 +65,7 @@ public class TestFacturaDao {
 		}
 	}
 
-	//Comprobamos el método buscarUnaFactura.
+	// Comprobamos el método buscarUnaFactura.
 	private static void comprobarBuscarUno(FacturaDao facturaDao) {
 		System.out.println("--------------------- Comprobar buscar una  FACTURA:");
 		Factura factura = facturaDao.buscarUnaFactura("F2020001");

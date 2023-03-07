@@ -1,12 +1,12 @@
 package javabeans;
 
 public class Departamento {
-	
-	//Atributos de la clase departamento.
+
+	// Atributos de la clase departamento.
 	private int idDepartamento;
 	private String nombre, direccion;
 
-	//Getters & Setters.
+	// Getters & Setters.
 	public int getIdDepartamento() {
 		return idDepartamento;
 	}
@@ -31,12 +31,12 @@ public class Departamento {
 		this.direccion = direccion;
 	}
 
-	//Constructor por defecto.
+	// Constructor por defecto.
 	public Departamento() {
 		super();
 	}
 
-	//Constructor con parametros.
+	// Constructor con parametros.
 	public Departamento(int idDepartamento, String nombre, String direccion) {
 		super();
 		this.idDepartamento = idDepartamento;
@@ -44,7 +44,7 @@ public class Departamento {
 		this.direccion = direccion;
 	}
 
-	//Sobreescritura del método toString.
+	// Sobreescritura del método toString.
 	@Override
 	public String toString() {
 		return "Departamento [idDepartamento=" + idDepartamento + ", nombre=" + nombre + ", direccion=" + direccion

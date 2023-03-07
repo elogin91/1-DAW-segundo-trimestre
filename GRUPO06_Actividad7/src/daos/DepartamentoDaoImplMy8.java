@@ -10,6 +10,7 @@ import javabeans.Departamento;
 
 public class DepartamentoDaoImplMy8 extends AbstractDao implements DepartamentoDao {
 
+	// Implementación del método altaDepartamento.
 	@Override
 	public int altaDepartamento(Departamento departamento) {
 		int filas = 0;
@@ -20,12 +21,13 @@ public class DepartamentoDaoImplMy8 extends AbstractDao implements DepartamentoD
 			statement.setString(3, departamento.getDireccion());
 			filas = statement.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("Error al introducir un nuevo cliente.");
+			System.out.println("Error al introducir un nuevo departamento.");
 			e.printStackTrace();
 		}
 		return filas;
 	}
 
+	// Implementación del método eliminarDepartamento.
 	@Override
 	public int eliminarDepartamento(int idDepartamento) {
 		int filas = 0;
@@ -40,12 +42,13 @@ public class DepartamentoDaoImplMy8 extends AbstractDao implements DepartamentoD
 		return filas;
 	}
 
+	// Implementación del método modificarDepartamento.
 	@Override
 	public int modificarDepartamento(Departamento departamento) {
 		int filas = 0;
 		try {
-			PreparedStatement statement = conn.prepareStatement(
-					"Update departamentos set nombre = ?, direccion = ? WHERE id_depar=?");
+			PreparedStatement statement = conn
+					.prepareStatement("Update departamentos set nombre = ?, direccion = ? WHERE id_depar=?");
 			statement.setString(1, departamento.getNombre());
 			statement.setString(2, departamento.getDireccion());
 			statement.setInt(3, departamento.getIdDepartamento());
@@ -57,6 +60,7 @@ public class DepartamentoDaoImplMy8 extends AbstractDao implements DepartamentoD
 		return filas;
 	}
 
+	// Implementación del método buscarUnDepartamento.
 	@Override
 	public Departamento buscarUnDepartamento(int idDepartamento) {
 		Departamento departamento = null;
@@ -77,6 +81,7 @@ public class DepartamentoDaoImplMy8 extends AbstractDao implements DepartamentoD
 		return departamento;
 	}
 
+	// Implementación del método buscarTodosDepartamentos.
 	@Override
 	public List<Departamento> buscarTodosDepartamentos() {
 		List<Departamento> departamentos = new ArrayList<>();

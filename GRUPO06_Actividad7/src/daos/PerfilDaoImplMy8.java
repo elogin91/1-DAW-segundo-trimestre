@@ -10,6 +10,7 @@ import javabeans.Perfil;
 
 public class PerfilDaoImplMy8 extends AbstractDao implements PerfilDao {
 
+	// Implementación del método altaPerfil.
 	@Override
 	public int altaPerfil(Perfil perfil) {
 		int filas = 0;
@@ -27,6 +28,7 @@ public class PerfilDaoImplMy8 extends AbstractDao implements PerfilDao {
 		return filas;
 	}
 
+	// Implementación del método eliminarPerfil.
 	@Override
 	public int eliminarPerfil(int idPerfil) {
 		int filas = 0;
@@ -41,6 +43,7 @@ public class PerfilDaoImplMy8 extends AbstractDao implements PerfilDao {
 		return filas;
 	}
 
+	// Implementación del método modificarPerfil.
 	@Override
 	public int modificarPerfil(Perfil perfil) {
 		int filas = 0;
@@ -59,15 +62,17 @@ public class PerfilDaoImplMy8 extends AbstractDao implements PerfilDao {
 		return filas;
 	}
 
+	// Implementación del método buscarUnPerfil.
 	@Override
 	public Perfil buscarUnPerfil(int idPerfil) {
-		Perfil perfil = new Perfil();
+		Perfil perfil = null;
 
 		try {
 			PreparedStatement statement = conn.prepareStatement("Select * FROM perfiles WHERE id_perfil=?");
 			statement.setInt(1, idPerfil);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
+				perfil = new Perfil();
 				perfil.setIdPerfil(resultSet.getInt("id_perfil"));
 				perfil.setNombre(resultSet.getString("nombre"));
 				perfil.setPrecioHora(resultSet.getDouble("precio_hora"));
@@ -80,6 +85,7 @@ public class PerfilDaoImplMy8 extends AbstractDao implements PerfilDao {
 		return perfil;
 	}
 
+	// Implementación del método buscarTodosPerfiles.
 	@Override
 	public List<Perfil> buscarTodosPerfiles() {
 		List<Perfil> perfiles = new ArrayList<>();

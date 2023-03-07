@@ -10,6 +10,7 @@ import javabeans.Factura;
 
 public class FacturaDaoImplMy8 extends AbstractDao implements FacturaDao {
 
+	// Implementación del método altaFactura.
 	@Override
 	public int altaFactura(Factura factura) {
 		int filas = 0;
@@ -26,6 +27,7 @@ public class FacturaDaoImplMy8 extends AbstractDao implements FacturaDao {
 		return filas;
 	}
 
+	// Implementación del método eliminarFactura.
 	@Override
 	public int eliminarFactura(String idFactura) {
 		int filas = 0;
@@ -40,6 +42,7 @@ public class FacturaDaoImplMy8 extends AbstractDao implements FacturaDao {
 		return filas;
 	}
 
+	// Implementación del método modificarFactura.
 	@Override
 	public int modificarFactura(Factura factura) {
 		int filas = 0;
@@ -57,9 +60,10 @@ public class FacturaDaoImplMy8 extends AbstractDao implements FacturaDao {
 		return filas;
 	}
 
+	// Implementación del método buscarUnaFactura.
 	@Override
 	public Factura buscarUnaFactura(String idFactura) {
-		Factura factura = new Factura();
+		Factura factura = null;
 		ProyectoDao proyectoDao = new ProyectoDaoImplMy8();
 
 		try {
@@ -67,6 +71,7 @@ public class FacturaDaoImplMy8 extends AbstractDao implements FacturaDao {
 			statement.setString(1, idFactura);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
+				factura = new Factura();
 				factura.setIdFactura(resultSet.getString("id_factura"));
 				factura.setDescripcion(resultSet.getString("descripcion"));
 				factura.setProyecto(proyectoDao.buscarUnProyecto((resultSet.getString("id_proyecto"))));
@@ -79,6 +84,7 @@ public class FacturaDaoImplMy8 extends AbstractDao implements FacturaDao {
 		return factura;
 	}
 
+	// Implementación del método buscarTodasFacturas.
 	@Override
 	public List<Factura> buscarTodasFacturas() {
 		List<Factura> facturas = new ArrayList<>();

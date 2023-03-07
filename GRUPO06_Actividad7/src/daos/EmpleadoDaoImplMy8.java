@@ -10,6 +10,7 @@ import javabeans.Empleado;
 
 public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 
+	// Implementación método altaEmpleado.
 	@Override
 	public int altaEmpleado(Empleado empleado) {
 		int filas = 0;
@@ -36,6 +37,7 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		return filas;
 	}
 
+	// Implementación método eliminarEmpleado.
 	@Override
 	public int eliminarEmpleado(int idEmpleado) {
 		int filas = 0;
@@ -50,6 +52,7 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		return filas;
 	}
 
+	// Implementación método modificarEmpleado.
 	@Override
 	public int modificarEmpleado(Empleado empleado) {
 		int filas = 0;
@@ -76,17 +79,19 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		return filas;
 	}
 
+	// Implementación método buscarUnEmpleado.
 	@Override
 	public Empleado buscarUnEmpleado(int idEmpleado) {
 		PerfilDao perfilDao = new PerfilDaoImplMy8();
 		DepartamentoDao departamentoDao = new DepartamentoDaoImplMy8();
-		Empleado empleado = new Empleado();
+		Empleado empleado = null;
 
 		try {
 			PreparedStatement statement = conn.prepareStatement("Select * FROM empleados WHERE id_empl=?");
 			statement.setInt(1, idEmpleado);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
+				empleado = new Empleado();
 				empleado.setIdEmpleado(resultSet.getInt("id_empl"));
 				empleado.setNombre(resultSet.getString("nombre"));
 				empleado.setApellidos(resultSet.getString("apellidos"));
@@ -106,6 +111,7 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		return empleado;
 	}
 
+	// Implementación método buscarTodosEmpleados.
 	@Override
 	public List<Empleado> buscarTodosEmpleados() {
 		List<Empleado> empleados = new ArrayList<>();
@@ -138,6 +144,7 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		return empleados;
 	}
 
+	// Implementación método empleadosByDepartamento.
 	@Override
 	public List<Empleado> empleadosByDepartamento(int idDepar) {
 		List<Empleado> empleados = new ArrayList<>();
@@ -171,6 +178,7 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		return empleados;
 	}
 
+	// Implementación método empleadosBySexo.
 	@Override
 	public List<Empleado> empleadosBySexo(char sexo) {
 		List<Empleado> empleados = new ArrayList<>();
@@ -205,6 +213,7 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		return empleados;
 	}
 
+	// Implementación método empleadosByApellido.
 	@Override
 	public List<Empleado> empleadosByApellido(String subcadena) {
 
@@ -213,8 +222,8 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		DepartamentoDao departamentoDao = new DepartamentoDaoImplMy8();
 
 		try {
-			PreparedStatement statement = conn.prepareStatement("Select * FROM empleados WHERE apellidos = ?");
-			statement.setString(1, subcadena);
+			PreparedStatement statement = conn.prepareStatement("Select * FROM empleados WHERE apellidos like ?");
+			statement.setString(1, "%" + subcadena + "%");
 			ResultSet resultSet = statement.executeQuery();
 
 			while (resultSet.next()) {
@@ -241,6 +250,7 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		return empleados;
 	}
 
+	// Implementación método salarioTotal SIN PARAMETROS.
 	@Override
 	public Double salarioTotal() {
 		Double salarioTotal = 0.0;
@@ -258,6 +268,7 @@ public class EmpleadoDaoImplMy8 extends AbstractDao implements EmpleadoDao {
 		return salarioTotal;
 	}
 
+	// Implementación método salarioTotal CON PARAMETROS.
 	@Override
 	public Double salarioTotal(int idDepar) {
 		Double salarioTotal = 0.0;

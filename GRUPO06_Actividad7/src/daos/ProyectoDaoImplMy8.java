@@ -11,6 +11,7 @@ import javabeans.Proyecto;
 
 public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 
+	// Implementación del método altaProyecto.
 	@Override
 	public int altaProyecto(Proyecto proyecto) {
 		Date fechaFinReal = null;
@@ -42,6 +43,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return filas;
 	}
 
+	// Implementación del método eliminarProyecto.
 	@Override
 	public int eliminarProyecto(String idProyecto) {
 		int filas = 0;
@@ -56,6 +58,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return filas;
 	}
 
+	// Implementación del método modificarProyecto.
 	@Override
 	public int modificarProyecto(Proyecto proyecto) {
 		Date fechaFinReal = null;
@@ -86,6 +89,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return filas;
 	}
 
+	// Implementación del método buscarUnProyecto.
 	@Override
 	public Proyecto buscarUnProyecto(String idProyecto) {
 		Proyecto proyecto = null;
@@ -120,6 +124,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return proyecto;
 	}
 
+	// Implementación del método buscarTodosProyectos.
 	@Override
 	public List<Proyecto> buscarTodosProyectos() {
 		List<Proyecto> proyectos = new ArrayList<>();
@@ -152,6 +157,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return proyectos;
 	}
 
+	// Implementación del método proyectosByEstado.
 	@Override
 	public List<Proyecto> proyectosByEstado(String estado) {
 
@@ -187,6 +193,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return proyectos;
 	}
 
+	// Implementación del método proyectosByCliente.
 	@Override
 	public List<Proyecto> proyectosByCliente(String cif) {
 		List<Proyecto> proyectos = new ArrayList<>();
@@ -222,6 +229,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return proyectos;
 	}
 
+	// Implementación del método proyectosByJefeProyectoAndByEstado.
 	@Override
 	public List<Proyecto> proyectosByJefeProyectoAndByEstado(int jefeProyecto, String estado) {
 		List<Proyecto> proyectos = new ArrayList<>();
@@ -259,6 +267,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return proyectos;
 	}
 
+	// Implementación del método importesVentaProyectosTerminados.
 	@Override
 	public double importesVentaProyectosTerminados() {
 		double ventasProyectosTerminados = 0.0;
@@ -278,6 +287,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return ventasProyectosTerminados;
 	}
 
+	// Implementación del método margenBrutoProyectosTerminados.
 	@Override
 	public double margenBrutoProyectosTerminados() {
 		double margenProyectosTerminados = 0.0;
@@ -297,6 +307,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 		return margenProyectosTerminados;
 	}
 
+	// Implementación del método diasATerminoProyectoActivo.
 	@Override
 	public int diasATerminoProyectoActivo(String codigoProyecto) {
 

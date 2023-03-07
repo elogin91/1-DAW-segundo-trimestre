@@ -8,7 +8,14 @@ import java.util.List;
 
 import javabeans.Cliente;
 
+/**
+ * Clase que implementa los métodos de la interfaz Cliente DAO, con acceso a
+ * base de datos.
+ *
+ */
 public class ClienteDaoImplMy8 extends AbstractDao implements ClienteDao {
+
+	// Implementación del método buscarUno.
 	@Override
 	public Cliente buscarUno(String cif) {
 		Cliente cliente = null;
@@ -32,6 +39,7 @@ public class ClienteDaoImplMy8 extends AbstractDao implements ClienteDao {
 		return cliente;
 	}
 
+	// Implementación del método buscarTodo.
 	@Override
 	public List<Cliente> buscarTodo() {
 		List<Cliente> clientes = new ArrayList<>();
@@ -56,6 +64,7 @@ public class ClienteDaoImplMy8 extends AbstractDao implements ClienteDao {
 		return clientes;
 	}
 
+	// Implementación del método altaCliente.
 	@Override
 	public int altaCliente(Cliente cliente) {
 		int filas = 0;
@@ -76,6 +85,7 @@ public class ClienteDaoImplMy8 extends AbstractDao implements ClienteDao {
 		return filas;
 	}
 
+	// Implementación del método eliminarCliente.
 	@Override
 	public int eliminarCliente(String cif) {
 		int filas = 0;
@@ -90,6 +100,7 @@ public class ClienteDaoImplMy8 extends AbstractDao implements ClienteDao {
 		return filas;
 	}
 
+	// Implementación del método modificarCliente.
 	@Override
 	public int modificarCliente(Cliente cliente) {
 		int filas = 0;

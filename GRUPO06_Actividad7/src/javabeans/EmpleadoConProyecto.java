@@ -3,21 +3,21 @@ package javabeans;
 import java.sql.Date;
 
 public class EmpleadoConProyecto {
-	
-	//Atributos de la clase EmpleadoConProyecto
+
+	// Atributos de la clase EmpleadoConProyecto
 	private int numeroOrden, horasAsignadas;
 	private Proyecto proyecto;
 	private Empleado empleado;
 	private Date fechaIncorporacion;
-	
-	//Método propio que calcula Horas * precio/hora
+
+	// Método propio que calcula Horas * precio/hora
 	public double costeHorasAsignadas() {
 		return horasAsignadas * empleado.getPerfil().getPrecioHora();
 	}
 
-	//Constructor con parametros.
-	public EmpleadoConProyecto(int numeroOrden, int horasAsignadas, Proyecto proyecto,
-			Empleado empleado, Date fechaIncorporacion) {
+	// Constructor con parametros.
+	public EmpleadoConProyecto(int numeroOrden, int horasAsignadas, Proyecto proyecto, Empleado empleado,
+			Date fechaIncorporacion) {
 		super();
 		this.numeroOrden = numeroOrden;
 		this.horasAsignadas = horasAsignadas;
@@ -26,20 +26,19 @@ public class EmpleadoConProyecto {
 		this.fechaIncorporacion = fechaIncorporacion;
 	}
 
-	//Constructor por defecto.
+	// Constructor por defecto.
 	public EmpleadoConProyecto() {
 		super();
 	}
 
-	//Sobreescritura del método toString.
+	// Sobreescritura del método toString.
 	@Override
 	public String toString() {
-		return "ProyectoConEmpleado [numeroOrden=" + numeroOrden +  ", horasAsignadas="
-				+ horasAsignadas + ", proyecto=" + proyecto + ", empleado=" + empleado + ", fechaIncorporacion="
-				+ fechaIncorporacion + "]";
+		return "ProyectoConEmpleado [numeroOrden=" + numeroOrden + ", horasAsignadas=" + horasAsignadas + ", proyecto="
+				+ proyecto + ", empleado=" + empleado + ", fechaIncorporacion=" + fechaIncorporacion + "]";
 	}
 
-	//Getters & Setters.
+	// Getters & Setters.
 	public int getNumeroOrden() {
 		return numeroOrden;
 	}
@@ -79,6 +78,5 @@ public class EmpleadoConProyecto {
 	public void setFechaIncorporacion(Date fechaIncorporacion) {
 		this.fechaIncorporacion = fechaIncorporacion;
 	}
-	
-	
+
 }

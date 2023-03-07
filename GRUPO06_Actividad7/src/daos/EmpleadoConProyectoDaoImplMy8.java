@@ -9,7 +9,7 @@ import java.util.List;
 import javabeans.EmpleadoConProyecto;
 
 public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements EmpleadoConProyectoDao {
-
+	// Implementación del método altaEmpleadoConProyecto.
 	@Override
 	public int altaEmpleadoConProyecto(EmpleadoConProyecto proyectoEmpleado) {
 		int filas = 0;
@@ -30,6 +30,7 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 		return filas;
 	}
 
+	// Implementación del método eliminarEmpleadoConProyecto.
 	@Override
 	public int eliminarEmpleadoConProyecto(int numeroOrden) {
 		int filas = 0;
@@ -46,18 +47,19 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 		return filas;
 	}
 
+	// Implementación del método modificarEmpleadoConProyecto.
 	@Override
 	public int modificaEmpleadoConProyecto(EmpleadoConProyecto proyectoEmpleado) {
 		int filas = 0;
 		try {
 			PreparedStatement statement = conn.prepareStatement(
-					"Update proyecto_con_empleados set id_proyecto = ?, id_empl = ?, horas_asignadas = ?, fecha_incorporacion WHERE numero_orden=?");
+					"Update proyecto_con_empleados set id_proyecto = ?, id_empl = ?, horas_asignadas = ?, fecha_incorporacion = ? WHERE numero_orden=?");
 
-			statement.setInt(5, proyectoEmpleado.getNumeroOrden());
 			statement.setString(1, proyectoEmpleado.getProyecto().getIdProyecto());
 			statement.setInt(2, proyectoEmpleado.getEmpleado().getIdEmpleado());
 			statement.setInt(3, proyectoEmpleado.getHorasAsignadas());
 			statement.setDate(4, proyectoEmpleado.getFechaIncorporacion());
+			statement.setInt(5, proyectoEmpleado.getNumeroOrden());
 			filas = statement.executeUpdate();
 		} catch (SQLException e) {
 			System.out.println("Error al modificar los datos");
@@ -66,11 +68,12 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 		return filas;
 	}
 
+	// Implementación del método buscarEmpleadoConProyecto.
 	@Override
 	public EmpleadoConProyecto buscarEmpleadoConProyecto(int numeroOrden) {
 		ProyectoDao proyectoDao = new ProyectoDaoImplMy8();
 		EmpleadoDao empleadoDao = new EmpleadoDaoImplMy8();
-		EmpleadoConProyecto EmpleadoConProyecto = new EmpleadoConProyecto();
+		EmpleadoConProyecto EmpleadoConProyecto = null;
 
 		try {
 			PreparedStatement statement = conn
@@ -78,6 +81,7 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 			statement.setInt(1, numeroOrden);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
+				EmpleadoConProyecto = new EmpleadoConProyecto();
 				EmpleadoConProyecto.setNumeroOrden(resultSet.getInt("numero_orden"));
 				EmpleadoConProyecto.setProyecto(proyectoDao.buscarUnProyecto(resultSet.getString("id_proyecto")));
 				EmpleadoConProyecto.setEmpleado(empleadoDao.buscarUnEmpleado(resultSet.getInt("id_empl")));
@@ -91,6 +95,7 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 		return EmpleadoConProyecto;
 	}
 
+	// Implementación del método buscarTodosEmpleadoConProyecto.
 	@Override
 	public List<EmpleadoConProyecto> buscarTodosEmpleadoConProyecto() {
 		List<EmpleadoConProyecto> EmpleadoConProyectos = new ArrayList<>();
@@ -115,6 +120,7 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 		return EmpleadoConProyectos;
 	}
 
+	// Implementación del método empleadosByProyecto.
 	@Override
 	public List<EmpleadoConProyecto> empleadosByProyecto(String codigoProyecto) {
 		List<EmpleadoConProyecto> EmpleadoConProyectos = new ArrayList<>();
@@ -142,6 +148,7 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 		return EmpleadoConProyectos;
 	}
 
+	// Implementación del método asignarEmpleadosAProyecto.
 	@Override
 	public int asignarEmpleadosAProyecto(List<EmpleadoConProyecto> empleados) {
 		int count = 0;
@@ -151,12 +158,14 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 		return count;
 	}
 
+	// Implementación del método horasAsignadasAProyecto.
 	@Override
 	public int horasAsignadasAProyecto(String codigoProyecto) {
 		int horasProyecto = 0;
 		try {
 			PreparedStatement statement = conn
-					.prepareStatement("Select SUM(horas_asignadas) FROM proyecto_con_empleados where id_proyecto =?");
+					.prepareStatement("Select SUM(horas_asignadas) FROM proyecto_con_empleados where id_proyecto = ?");
+			statement.setString(1, codigoProyecto);
 			ResultSet resultSet = statement.executeQuery();
 			if (resultSet.next()) {
 				horasProyecto = resultSet.getInt(1);
@@ -167,6 +176,7 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 		return horasProyecto;
 	}
 
+	// Implementación del método costeActualDeProyecto.
 	@Override
 	public double costeActualDeProyecto(String codigoProyecto) {
 		List<EmpleadoConProyecto> empleadosConProyecto = empleadosByProyecto(codigoProyecto);
@@ -177,6 +187,7 @@ public class EmpleadoConProyectoDaoImplMy8 extends AbstractDao implements Emplea
 		return costeTotal;
 	}
 
+	// Implementación del método margenActualProyecto.
 	@Override
 	public double margenActualProyecto(String codigoProyecto) {
 		ProyectoDao proyectoDao = new ProyectoDaoImplMy8();
