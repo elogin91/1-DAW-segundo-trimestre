@@ -88,7 +88,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 
 	@Override
 	public Proyecto buscarUnProyecto(String idProyecto) {
-		Proyecto proyecto = new Proyecto();
+		Proyecto proyecto = null;
 		EmpleadoDao empleadoDao = new EmpleadoDaoImplMy8();
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 
@@ -98,6 +98,7 @@ public class ProyectoDaoImplMy8 extends AbstractDao implements ProyectoDao {
 			ResultSet resultSet = statement.executeQuery();
 
 			if (resultSet.next()) {
+				proyecto = new Proyecto();
 				proyecto.setIdProyecto(resultSet.getString("id_proyecto"));
 				proyecto.setDescripcion(resultSet.getString("descripcion"));
 				proyecto.setFechaInicio(resultSet.getDate("fecha_inicio"));

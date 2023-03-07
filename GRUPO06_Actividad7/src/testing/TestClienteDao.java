@@ -55,7 +55,8 @@ public class TestClienteDao {
 		imprimirTodos(clienteDao);
 	}
 
-	// Método que imprime por consola los clientes que devuelve el método
+	// Método que imprime por consola los clientes de la lista que devuelve el
+	// método
 	// buscarTodo.
 	private static void imprimirTodos(ClienteDao clienteDao) {
 		for (Cliente cliente : clienteDao.buscarTodo()) {

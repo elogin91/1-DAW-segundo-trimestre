@@ -4,12 +4,15 @@ import java.sql.Date;
 import java.time.temporal.ChronoUnit;
 
 public class Proyecto {
+
+	// Atributos de la clase proyecto.
 	private String idProyecto, descripcion, estado;
 	private Date fechaInicio, fechaFinPrevisto, fechaFinReal;
 	private Double ventaPrevista, costePrevisto, costeReal;
 	private Empleado jefeProyecto;
 	private Cliente cliente;
 
+	// Constructor con parametros.
 	public Proyecto(String idProyecto, String descripcion, String estado, Date fechaInicio, Date fechaFinPrevisto,
 			Date fechaFinReal, Double ventaPrevista, Double costePrevisto, Double costeReal, Empleado jefeProyecto,
 			Cliente cliente) {
@@ -27,34 +30,36 @@ public class Proyecto {
 		this.cliente = cliente;
 	}
 
-	//Método propio margén previsto.
-	public double margenPrevisto( ) {
-		
+	// Método propio margén previsto.
+	public double margenPrevisto() {
+
 		return ventaPrevista - costePrevisto;
 	}
-	
-	//Método propio margén real.
-	public double margenReal( ) {
-		
+
+	// Método propio margén real.
+	public double margenReal() {
+
 		return ventaPrevista - costeReal;
 	}
-	
-	//Método propio diferencia de gastos real y previsto.
-	public double diferenciaGastos( ) {
-		
+
+	// Método propio diferencia de gastos real y previsto.
+	public double diferenciaGastos() {
+
 		return costeReal - costePrevisto;
 	}
-	
-	//Método propio diferencia de días previstos y reales.
+
+	// Método propio diferencia de días previstos y reales.
 	public int diferenciaFinPrevistoReal() {
 		long dias = ChronoUnit.DAYS.between(fechaFinPrevisto.toInstant(), fechaFinReal.toInstant());
 		return (int) dias;
 	}
 
+	// Constructor por defecto.
 	public Proyecto() {
 		super();
 	}
 
+	// Getters & Setters.
 	public String getIdProyecto() {
 		return idProyecto;
 	}
@@ -143,6 +148,7 @@ public class Proyecto {
 		this.cliente = cliente;
 	}
 
+	// Sobreescritura del método toString.
 	@Override
 	public String toString() {
 		return "Proyecto [idProyecto=" + idProyecto + ", descripcion=" + descripcion + ", estado=" + estado

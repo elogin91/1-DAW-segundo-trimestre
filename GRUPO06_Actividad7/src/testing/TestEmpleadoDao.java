@@ -113,6 +113,9 @@ public class TestEmpleadoDao {
 		imprimirTodo(empleadoDao);
 	}
 
+	// Método que imprime por consola los empledados de la lista que devuelve el
+	// método
+	// buscarTodo.
 	private static void imprimirTodo(EmpleadoDao empleadoDao) {
 		for (Empleado empleado : empleadoDao.buscarTodosEmpleados()) {
 			System.out.println(empleado);
@@ -124,7 +127,7 @@ public class TestEmpleadoDao {
 		System.out.println("-------------------Comprobando buscar un empleado");
 		Empleado empleado = empleadoDao.buscarUnEmpleado(100);
 
-		if (empleadoDao.buscarUnEmpleado(100) != null) {
+		if (empleado != null) {
 			System.out.println("El empleado que busca tiene el nombre : " + empleado.getNombre());
 		} else {
 			System.out.println("Empleado no encontrado.");

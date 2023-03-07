@@ -10,7 +10,7 @@ public interface FacturaDao {
 
 	int eliminarFactura(String idFactura);
 
-	int modificalFactura(Factura factura);
+	int modificarFactura(Factura factura);
 
 	Factura buscarUnaFactura(String idFactura);
 

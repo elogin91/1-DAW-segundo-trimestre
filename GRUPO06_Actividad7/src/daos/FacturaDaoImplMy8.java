@@ -41,7 +41,7 @@ public class FacturaDaoImplMy8 extends AbstractDao implements FacturaDao {
 	}
 
 	@Override
-	public int modificalFactura(Factura factura) {
+	public int modificarFactura(Factura factura) {
 		int filas = 0;
 		try {
 			PreparedStatement statement = conn

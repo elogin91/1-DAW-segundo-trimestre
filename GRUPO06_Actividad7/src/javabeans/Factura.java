@@ -1,9 +1,12 @@
 package javabeans;
 
 public class Factura {
+
+	// Atributos de la clase Factura.
 	private String idFactura, descripcion;
 	private Proyecto proyecto;
 
+	// Constructor con parametros.
 	public Factura(String idFactura, String descripcion, Proyecto proyecto) {
 		super();
 		this.idFactura = idFactura;
@@ -11,10 +14,12 @@ public class Factura {
 		this.proyecto = proyecto;
 	}
 
+	// Constructor por defecto.
 	public Factura() {
 		super();
 	}
 
+	// Setters & Getters.
 	public String getIdFactura() {
 		return idFactura;
 	}
@@ -39,6 +44,7 @@ public class Factura {
 		this.proyecto = proyecto;
 	}
 
+	// Sobreescritura del método toString.
 	@Override
 	public String toString() {
 		return "Factura [idFactura=" + idFactura + ", descripcion=" + descripcion + ", proyecto=" + proyecto + "]";

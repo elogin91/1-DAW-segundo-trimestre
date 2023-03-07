@@ -3,6 +3,8 @@ package javabeans;
 import java.sql.Date;
 
 public class EmpleadoConProyecto {
+	
+	//Atributos de la clase EmpleadoConProyecto
 	private int numeroOrden, horasAsignadas;
 	private Proyecto proyecto;
 	private Empleado empleado;
@@ -13,6 +15,7 @@ public class EmpleadoConProyecto {
 		return horasAsignadas * empleado.getPerfil().getPrecioHora();
 	}
 
+	//Constructor con parametros.
 	public EmpleadoConProyecto(int numeroOrden, int horasAsignadas, Proyecto proyecto,
 			Empleado empleado, Date fechaIncorporacion) {
 		super();
@@ -23,10 +26,12 @@ public class EmpleadoConProyecto {
 		this.fechaIncorporacion = fechaIncorporacion;
 	}
 
+	//Constructor por defecto.
 	public EmpleadoConProyecto() {
 		super();
 	}
 
+	//Sobreescritura del método toString.
 	@Override
 	public String toString() {
 		return "ProyectoConEmpleado [numeroOrden=" + numeroOrden +  ", horasAsignadas="
@@ -34,6 +39,7 @@ public class EmpleadoConProyecto {
 				+ fechaIncorporacion + "]";
 	}
 
+	//Getters & Setters.
 	public int getNumeroOrden() {
 		return numeroOrden;
 	}

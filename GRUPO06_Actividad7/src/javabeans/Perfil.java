@@ -1,10 +1,13 @@
 package javabeans;
 
 public class Perfil {
+
+	// Atributos de la clase Perfil.
 	private int idPerfil;
 	private String nombre;
 	private double precioHora;
 
+	// Getters & Setters.
 	public double getPrecioHora() {
 		return precioHora;
 	}
@@ -29,11 +32,13 @@ public class Perfil {
 		this.nombre = nombre;
 	}
 
+	// Sobreescritura del método toString.
 	@Override
 	public String toString() {
-		return "Perfil [idPerfil=" + idPerfil + ", nombre=" + nombre + ", precio_hora=" + precioHora +"]";
+		return "Perfil [idPerfil=" + idPerfil + ", nombre=" + nombre + ", precio_hora=" + precioHora + "]";
 	}
 
+	// Constructor con parametros.
 	public Perfil(int idPerfil, String nombre, double precioHora) {
 		super();
 		this.idPerfil = idPerfil;
@@ -41,6 +46,7 @@ public class Perfil {
 		this.precioHora = precioHora;
 	}
 
+	// Constructor por defecto.
 	public Perfil() {
 		super();
 	}

@@ -3,6 +3,8 @@ package javabeans;
 import java.sql.Date;
 
 public class Empleado {
+
+	// Atributos de la clase Empleado.
 	private int idEmpleado;
 	Perfil perfil;
 	Departamento departamento;
@@ -11,8 +13,8 @@ public class Empleado {
 	private Date fechaIngreso, fechaNacimiento;
 	private char genero;
 
-	// Devuelve la suma del salario y la comision (complemento se ha refactorizado a
-	// comisión).
+	// Devuelve el salarioBruto sin comisiones (En la entidad Empleado de la BBDD no
+	// se recoge el atributo comisiones)
 	public double salarioBruto() {
 		return salario;
 	}
@@ -50,7 +52,8 @@ public class Empleado {
 		return nombre + " " + apellidos;
 
 	}
-	
+
+	// Constructo con parametros.
 	public Empleado(int idEmpleado, Perfil perfil, Departamento departamento, String nombre, String apellidos,
 			char genero, String email, String password, Double salario, Date fechaIngreso, Date fechaNacimiento) {
 		super();
@@ -68,10 +71,12 @@ public class Empleado {
 
 	}
 
+	// Constructor sin parametros.
 	public Empleado() {
 		super();
 	}
 
+	// Sobreescritura del método toString.
 	@Override
 	public String toString() {
 		return "Empleado [idEmpleado=" + idEmpleado + ", perfil=" + perfil + ", departamento=" + departamento
@@ -80,6 +85,7 @@ public class Empleado {
 				+ ", genero=" + genero + "]";
 	}
 
+	// Getters & Setters.
 	public int getIdEmpleado() {
 		return idEmpleado;
 	}

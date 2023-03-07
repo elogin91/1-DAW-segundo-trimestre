@@ -6,19 +6,27 @@ import daos.ClienteDao;
 import daos.ClienteDaoImplMy8;
 import javabeans.Cliente;
 
+/*
+ * Hacer una clase con main estático GestionClientes con un menú con las
+ * siguientes opciones:
+ * 
+ * 	1.Alta del Cliente.
+ * 	2.Buscar un Cliente.
+ *  3.Mostrar Todos. 
+ *  4.Eliminar un cliente 
+ *  5.Salir.
+ *  
+ */
 public class GestionClientes {
 	private int opcion = 0;
 	Scanner leer = new Scanner(System.in);
 
 	public static void main(String[] args) {
 
-		/*
-		 * Hacer una clase con main estático GestionClientes con un menú con las
-		 * siguientes opciones:
-		 * 
-		 * Alta del Cliente Buscar un Cliente Mostrar Todos. Eliminar un cliente Salir
-		 */
 		GestionClientes gestionandoCliente = new GestionClientes();
+
+		// Iniciamos el programa para gestionar clientes, hasta que el usuario pulse la
+		// operación "Salir".
 		while (gestionandoCliente.opcion != 5) {
 			gestionandoCliente.pintaMenu();
 			gestionandoCliente.leerOpcion();
@@ -26,6 +34,9 @@ public class GestionClientes {
 		}
 	}
 
+	/**
+	 * Método que selecciona la operación a realizar según la opción elegida.
+	 */
 	private void seleccionaOpcion() {
 		if (opcion == 1) {
 			ejecutarAltaCliente();
@@ -43,11 +54,17 @@ public class GestionClientes {
 
 	}
 
+	/**
+	 * Método que ejecuta la opcion salir del programa.
+	 */
 	private void ejecutarSalir() {
 		System.out.println("Cerrando el programa. ¡Hasta la próxima!");
 
 	}
 
+	/**
+	 * Método que ejecuta la opcion eliminar cliente del programa.
+	 */
 	private void ejecutarEliminarCliente() {
 		System.out.println("Introduzca el cif del cliente a eliminar:");
 		String cif = leer.nextLine();
@@ -63,6 +80,9 @@ public class GestionClientes {
 
 	}
 
+	/**
+	 * Método que ejecuta la mostrar todos los clientes del programa.
+	 */
 	private void ejecutarMostrarTodosClientes() {
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 
@@ -72,6 +92,9 @@ public class GestionClientes {
 		}
 	}
 
+	/**
+	 * Método que ejecuta la opcion buscar un cliente del programa.
+	 */
 	private void ejecutarBuscarCliente() {
 		System.out.println("Introduzca el cif del cliente a mostrar:");
 		String cif = leer.nextLine();
@@ -86,6 +109,9 @@ public class GestionClientes {
 
 	}
 
+	/**
+	 * Método que ejecuta la opcion alta de cliente del programa.
+	 */
 	private void ejecutarAltaCliente() {
 		System.out.println("Introduzca los datos del cliente a agregar:");
 		System.out.println("Introduzca el CIf:");
@@ -104,17 +130,24 @@ public class GestionClientes {
 		Cliente cliente = new Cliente(cif, nombre, apellidos, domicilio, facturacionAnual, numeroEmpleados);
 		ClienteDao clienteDao = new ClienteDaoImplMy8();
 
-		if(clienteDao.altaCliente(cliente)==1) {
+		if (clienteDao.altaCliente(cliente) == 1) {
 			System.out.println("Cliente agregado correctamente.");
 			System.out.println("Cliente agregado: " + clienteDao.buscarUno(cif));
 		}
 	}
 
+	/**
+	 * Método recolecta la opción cogida por el usuario.
+	 */
 	private int leerOpcion() {
 		return opcion = Integer.parseInt(leer.nextLine());
 
 	}
 
+	/**
+	 * Método que imprime el menú de las opciones disponibles en el programa por
+	 * consola.
+	 */
 	private void pintaMenu() {
 		System.out.println("Iniciando Gestión de Clientes, por favor elija una opción marcando el número:");
 		System.out.println("1. Alta de Cliente.");

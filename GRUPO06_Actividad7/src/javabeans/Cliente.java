@@ -2,14 +2,17 @@ package javabeans;
 
 public class Cliente {
 
+	// Atribuitos de la clase Cliente.
 	private String cif, nombre, apellidos, domicilio;
 	private Double facturacionAnual;
 	private int numeroEmpleado;
 
+	// Constructor por defecto.
 	public Cliente() {
 		super();
 	}
 
+	// Constructor con parametros.
 	public Cliente(String cif, String nombre, String apellidos, String domicilio, Double facturacionAnual,
 			int numeroEmpleado) {
 		super();
@@ -21,6 +24,7 @@ public class Cliente {
 		this.numeroEmpleado = numeroEmpleado;
 	}
 
+	// Getters & Setters.
 	public String getNombre() {
 		return nombre;
 	}
@@ -69,11 +73,11 @@ public class Cliente {
 		this.numeroEmpleado = numeroEmpleado;
 	}
 
+	// Sobreescritura del método toString.
 	@Override
 	public String toString() {
 		return "Cliente [cif=" + cif + ", nombre=" + nombre + ", apellidos=" + apellidos + ", domicilio=" + domicilio
 				+ ", facturacionAnual=" + facturacionAnual + ", numeroEmpleado=" + numeroEmpleado + "]";
 	}
-
 
 }

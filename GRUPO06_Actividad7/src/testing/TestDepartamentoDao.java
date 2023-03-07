@@ -54,7 +54,8 @@ public class TestDepartamentoDao {
 		imprimirTodos(departamentoDao);
 	}
 
-	// Método que imprime por consola los departamentos que devuelve el método
+	// Método que imprime por consola los departamentos de la lista que devuelve el
+	// método
 	// buscarTodosDepartamentos.
 	private static void imprimirTodos(DepartamentoDao departamentoDao) {
 		for (Departamento departamento : departamentoDao.buscarTodosDepartamentos()) {
@@ -67,7 +68,7 @@ public class TestDepartamentoDao {
 		System.out.println("------------------Comprobando buscar un departamento:");
 		Departamento departamento = departamentoDao.buscarUnDepartamento(50);
 
-		if (departamentoDao.buscarUnDepartamento(50) != null) {
+		if (departamento != null) {
 			System.out.println("El Departamento que busca tiene el nombre : " + departamento.getNombre());
 		} else {
 			System.out.println("Departamento no encontrado.");
